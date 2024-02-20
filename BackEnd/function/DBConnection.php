@@ -16,4 +16,19 @@
             echo "Error: " . $e->getMessage();
             }
     }
+
+    function connection_to_Sqlite_DB() {
+        $database_file = "./DB/CryptoShowDB.db";
+    
+        // Create a new SQLite3 database connection
+        $db = new SQLite3($database_file);
+    
+        if (!$db) {
+            die("Failed to connect to SQLite database: " . $db->lastErrorMsg());
+        } else {
+            echo "Connected to SQLite database successfully";
+        }
+    
+        return $db;
+    }
 ?>
