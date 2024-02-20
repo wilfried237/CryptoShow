@@ -7,7 +7,9 @@
         '/'=> './pages/home.php',
         '/about'=> './pages/aboutUs.php',
         '/contact'=> './pages/contact.php',
-        '/threads'=>'./pages/threads.php'
+        '/threads'=>'./pages/threads.php',
+        '/login'=>'./pages/login/login.php',
+        '/register'=> './pages/registration/registration.php',
     ];
 
     routes_to_Controller($uri,$routes);
