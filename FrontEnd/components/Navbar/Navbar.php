@@ -1,2 +1,2 @@
 <?php require('components/Header/header.php')?>
-<h1>Navbar</h1>
+<h1>Navbarrggrgrgrg</h1>
