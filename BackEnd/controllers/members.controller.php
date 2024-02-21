@@ -60,14 +60,14 @@
             $conn = connection_to_database();
             $sql = 'SELECT * FROM person WHERE EML ='.$email.'AND PSW ='.$password.' LIMIT 1';
             $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
+            // if ($result->num_rows > 0) {
+            //    // $row = $result->fetch_assoc();
                 
-            } else {
-                http_response_code(405);
-                $response = array('status'=> 'success','message'=> 'User Not found');
-                echo json_encode($response);
-            }
+            // } else {
+            //     http_response_code(405);
+            //     $response = array('status'=> 'success','message'=> 'User Not found');
+            //     echo json_encode($response);
+            // }
             // $stmt = $conn->prepare($sql);
             // $stmt->bindParam(':email', $email);
             // $stmt->bindParam(':password', $password);
@@ -79,16 +79,16 @@
     }
     function show_all_member(){
         echo "show all members paths ";
-        $conn = connection_to_database();
-        $sql = "SELECT * FROM members";
+        $conn = connection_to_Sqlite_DB();
+        $sql = "SELECT * FROM Member;";
         $result = $conn->query($sql);
-            while ($row = $result->fetch())
-            {
-                print_r($row);
-                foreach ($row as $key => $value) {
-                    echo "$key: $value <br>";
-                }
-                echo $row['PN'];
+        
+        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            print_r($row);
+            foreach ($row as $key => $value) {
+                echo "$key: $value <br>";
             }
+            echo $row['PN'];
+        }
     }
 ?>
