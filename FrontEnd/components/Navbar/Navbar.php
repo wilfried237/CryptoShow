@@ -1,3 +1,3 @@
 <?php require('components/Header/header.php')?>
-<link rel="stylesheet" href="Navbar.css">
-<h1>Navbarrggrgrgrg</h1>
+<link rel="stylesheet" href="./components/Navbar/Navbar.css">
+<h1>Navbar</h1>
