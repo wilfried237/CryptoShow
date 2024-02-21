@@ -25,8 +25,6 @@
     
         if (!$db) {
             die("Failed to connect to SQLite database: " . $db->lastErrorMsg());
-        } else {
-            echo "Connected to SQLite database successfully";
         }
     
         return $db;
