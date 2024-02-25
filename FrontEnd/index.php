@@ -10,6 +10,8 @@
         '/threads'=>'./pages/threads/threads.php',
         '/login'=>'./pages/login/login.php',
         '/register'=> './pages/registration/registration.php',
+        '/style'=>'./routes/style.routes.php',
+        '/images'=> './routes/images.routes.php',
     ];
 
     routes_to_Controller($uri,$routes);
