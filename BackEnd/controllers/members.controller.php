@@ -125,15 +125,38 @@
                     $threads_stmt->bindValue(':Threads_id', $threads_id);
                     $threads_result = $threads_stmt->execute();
                     $threads = $threads_result->fetchArray(SQLITE3_ASSOC);
+                    
                     if($threads){
-                        $threads_member_sql = 'INSERT INTO Thread_register VALUES (:Threads_id,:Member_id)';
-                        $threads_member_stmt = $conn->prepare($threads_member_sql);
-                        $threads_member_stmt->bindParam(':Threads_id', $threads_id);
-                        $threads_member_stmt->bindParam(':Member_id', $member_id);
+                        $threads_member_1_sql = 'SELECT * FROM Thread_register WHERE Thread_id= :thread_id AND Member_id = :member_id';
+                        $threads_member_1_stmt = $conn->prepare($threads_member_1_sql);
+                        $threads_member_1_stmt->bindValue('thread_id',$threads_id);
+                        $threads_member_1_stmt->bindValue(':member_id',$member_id);
+                        $threads_member_1_result = $threads_member_1_stmt->execute();
+                        $threads_member_1 = $threads_member_1_result->fetchArray(SQLITE3_ASSOC);
+                       
+                        if(!$threads_member_1){
 
-                        if($threads_member_stmt->execute()){
-                            echo json_encode(array('status'=> 'success','message'=> 'Booking is successfull'));
+                            if($threads['Threads'])
+                            {
+                                $threads_member_sql = 'INSERT INTO Thread_register VALUES (:Threads_id,:Member_id)';
+                                $threads_member_stmt = $conn->prepare($threads_member_sql);
+                                $threads_member_stmt->bindParam(':Threads_id', $threads_id);
+                                $threads_member_stmt->bindParam(':Member_id', $member_id);
+        
+                                if($threads_member_stmt->execute()){
+                                    echo json_encode(array('status'=> 'success','message'=> 'Booking is successfull'));
+                                }
+                                else{     
+                                    echo json_encode(array('status'=> 'error','message'=> 'Something when wrong, Booking failed'));
+                                }
+                            }
+
                         }
+                        else{
+                            http_response_code(401);
+                            echo json_encode(array('status'=> 'error','message'=> 'You are already booked into the system'));
+                        }
+
                     }
                     else{
                         http_response_code(401);
@@ -156,7 +179,7 @@
         }
     }
 
-    function view_threads(){
+    function show_all_threads(){
         header('Access-Control-Allow-Origin: http://localhost:8888');
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type');
@@ -166,7 +189,11 @@
         $sql = 'SELECT * FROM Threads';
         $stmt = $conn->prepare($sql);
         $result = $stmt->execute();
-        $result = $result->fetchArray(SQLITE3_ASSOC);
-        echo json_encode(array('status' => 'success', 'Threads'=> $result));
+        $threads_hash_map = [];
+
+        while($row = $result->fetchArray(SQLITE3_ASSOC)){
+            $threads_hash_map[$row['Thread_id']] = $row;
+        }
+        echo json_encode(array('status' => 'success', 'Threads'=> $threads_hash_map));
     }
 ?>
