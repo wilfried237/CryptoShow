@@ -14,5 +14,5 @@
         '/images'=> './routes/images.routes.php',
     ];
 
-    routes_to_Controller($uri,$routes);
+    routes_to_Controller_front($uri,$routes);
 ?>

@@ -1,11 +1,11 @@
 <?php
 
-// function dd( $value ) {
-//     echo"<pre>";
-//     var_dump( $value );
-//     echo "</pre>";
-//     die();
-// }
+function dd( $value ) {
+    echo"<pre>";
+    var_dump( $value );
+    echo "</pre>";
+    die();
+}
 
 function Urls($url){
     return $_SERVER['REQUEST_URI'] === $url;
@@ -20,7 +20,7 @@ function abort($code = 404){
 
 }
 
-function routes_to_Controller($uri,$routes){
+function routes_to_Controller_front($uri,$routes){
     if (array_key_exists($uri, $routes)) {
         $controllerPath = $routes[$uri];
         require($controllerPath);

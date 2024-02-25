@@ -1,10 +1,13 @@
 <?php
-require("./functions/function.php");
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
-$routes= [
-    '/images/logo'=> './images/logo.png',
-];
+switch ($uri) {
+    case '/images/logo':
+    require('./images/logo.png');
+    break;
+    default:
+    break;
+}
 
-routes_to_Controller($uri,$routes);
+
 ?>
