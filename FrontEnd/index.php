@@ -9,7 +9,7 @@
         '/contact'=> './pages/contactus/contact.php',
         '/threads'=>'./pages/threads/threads.php',
         '/login'=>'./pages/login/login.php',
-        '/register'=> './pages/registration/registration.php',
+        '/register'=>'./pages/registration/registration.php',
     ];
 
     routes_to_Controller($uri,$routes);

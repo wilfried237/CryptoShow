@@ -1,0 +1,129 @@
+  body {
+  place-items: center;
+  min-height: 100vh;
+  background: linear-gradient(blue, white);
+  font-family: "Anta", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.container {
+  text-align: center;
+  color: white;
+}
+
+.hero {
+  display: grid;
+  width: 100%;
+  height: 70%;
+  justify-content: center;
+  align-items: center;
+} 
+
+.box1 {
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+}
+
+.random-image {
+  margin-left: 130px;
+  width: 250px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(/pexels-anete-lusina-4792750.jpg);
+}
+
+p {
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  text-shadow:
+    0.07em 0 black,
+    0 0.07em black,
+    -0.07em 0 black,
+    0 -0.07em black;
+}
+
+ form {
+  width: 1500px;
+  height: 800px;
+  background: #212121;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  border-radius: 10px;
+  box-shadow: 10px 20px 10px rgba(0, 0, 0, 0.3);
+} 
+
+ /* nav {
+  display: flex;
+  width: 1400px;
+  gap: 1rem;
+  justify-content: center;
+}
+
+nav ul li:nth-last-child() {
+  flex-grow: 1;
+  justify-self: end;
+  place-items: end;
+  place-self: end;
+  float: right;
+}
+
+nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: flex;
+  justify-content: end;
+}
+
+nav ul li a {
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+
+}
+
+nav ul li a:hover {
+  background-color: #806f6f;
+}  */
+
+ .dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  margin-top: 30px;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropbtn {
+  padding: 10px 20px;
+}  

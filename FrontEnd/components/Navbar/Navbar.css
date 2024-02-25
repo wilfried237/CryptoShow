@@ -1,139 +1,247 @@
-body{
-    font-family: 'Poppins', sans-serif;
-    overflow-y: auto;
-  }
+
+
+/* body {
+  margin: 0;
+font-family: 'Poppins', sans-serif;
+}
+
+.navbar-container{
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.nav-links{
+  display: flex;
+  justify-content: space-evenly;
+  align: center;
+  width: 100%;
+
   
-  *{
-    margin:0;
-    list-style: none;
-    text-decoration: none;
-  }
+  font-size: 20px;
+
+}
+.nav-links a{
+  text-decoration: none;
+  color: black;
+}
+
+.nav-links a:hover{
+  color: #f0ba56;
+}
+
+.navbar-buttons a:nth-child(2){
+  text-decoration: none;
+  color: whitesmoke;
+  background: blue;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: background ease 0.5s;
   
-  nav{
-    height: 80px;
-    background: #aea3a3;
-  }
+}
+.navbar-buttons a:nth-child(1){
+  text-decoration: none;
+  color: #0d0d0d;
+
+}
+.navbar-buttons a:nth-child(1):hover{
+  color: #f0ba56;
   
-  nav img{
-    width: 150px;
-    position: absolute;
-    margin-top: -40px;;
-    top: 10px;
-    left: 4%;
-  }
+}
+
+.navbar-buttons a:nth-child(2):hover{
+  background-color: #7a56fb;
+}
+
+.navbar-buttons{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.navbar-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-image img{
+  left: 10%;
+  width: 130px;
   
-  nav ul{
-    float: right;
-    margin-right: 25px;
-  }
   
-  nav ul li{
-    display: inline-block;
-    line-height: 80px;
-    margin: 0 25px;
-  }
-  
-  nav ul li a{
-    position: relative;
-    color: #181111;
-    font-size: 14px;
-    padding: 5px 0;
-    text-transform: uppercase;
-  }
-  
-  nav ul li a:before{
-    position: absolute;
-    content: '';
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 100%;
-    background-color: #181111;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform .4s linear
-  }
-  
-  nav ul li a:hover:before{
-    transform: scaleX(1);
-    transform-origin: left;
-  
-  }
-  
-  label #btn,
-  label #cancel{
-    color: #181111;
-    font-size: 30px;
-    float: right;
-    line-height: 80px;
-    margin-right: 40px;
-    cursor: pointer;
-    display: none;
-  }
-  #check{
-    display: none;
-  }
-  
-  @media (max-width: 1111px) {
-    nav img{
-      left: 4%;
-        }
-  }
-  
-  @media (max-width: 944px) {
-    nav img{
-      left: 2%;
-      top: 20px;
-      width: 130px;
-        }
-    nav ul li a{
-      font-size: 13px;
-    }
-  
-  }
-  
-  @media (max-width: 860px) {
-    label #btn{
-      display: block;
-    }
-    .divScroll {
-      position: absolute;
-      overflow: scroll;
-      height: 100%;
-      width: 100%;
-    }
-    ul{
-      position: fixed; 
-      width: 100%;
-      height: 100%;
-      background: #aea3a3;
-      top: 80px;
-      left: -100%;
-      text-align: center;
-      transition: all .5s;
-      
-    }
-  
-    nav ul li{
-      display: block;
-      margin: 50px 0;
-      line-height: 30px;    
-    }
-    nav ul li a{
-      font-size: 13px;
-  
-    }
-  
-    #check:checked ~ ul{
-      left: 0;
-    }
-  
-    #check:checked ~ label #btn{
+}
+  @media (max-width: 768px) {
+    .nav-links {
       display: none;
-      
     }
-  
-    #check:checked ~ label #cancel{
-      display: block;
+
+    .navbar-buttons {
+      display: none;
     }
   }
+
+@media screen and (min-width: 768px) {
+  /* .navbar-menu{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+    height: auto;
+    right: 0;
+  } */
+
+  /* .navbar-container{
+    grid-template-columns: 1fr 1fr;
+    
+    
+  }
+  .invisible{
+    display: none;
+    
+    }
+  }   */ 
+
+
+body{
+  font-family
+  font-family: 'Poppins', sans-serif;
+  overflow-y: auto;
+}
+
+*{
+  margin:0;
+  list-style: none;
+  text-decoration: none;
+}
+
+nav{
+  height: 80px;
+  background: #aea3a3;
+}
+
+nav img{
+  width: 150px;
+  position: absolute;
+  margin-top: -40px;;
+  top: 10px;
+  left: 4%;
+}
+
+nav ul{
+  float: right;
+  margin-right: 25px;
+}
+
+nav ul li{
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 25px;
+}
+
+nav ul li a{
+  position: relative;
+  color: #181111;
+  font-size: 14px;
+  padding: 5px 0;
+  text-transform: uppercase;
+}
+
+nav ul li a:before{
+  position: absolute;
+  content: '';
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #181111;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s linear
+}
+
+nav ul li a:hover:before{
+  transform: scaleX(1);
+  transform-origin: left;
+
+}
+
+label #btn,
+label #cancel{
+  color: #181111;
+  font-size: 30px;
+  float: right;
+  line-height: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+#check{
+  display: none;
+}
+
+@media (max-width: 1111px) {
+  nav img{
+    left: 4%;
+      }
+}
+
+@media (max-width: 944px) {
+  nav img{
+    left: 2%;
+    top: 20px;
+    width: 130px;
+      }
+  nav ul li a{
+    font-size: 13px;
+  }
+
+}
+
+@media (max-width: 860px) {
+  label #btn{
+    display: block;
+  }
+  .divScroll {
+    position: absolute;
+    overflow: scroll;
+    height: 100%;
+    width: 100%;
+  }
+  ul{
+    position: fixed; 
+    width: 100%;
+    height: 100%;
+    background: #aea3a3;
+    top: 80px;
+    left: -100%;
+    text-align: center;
+    transition: all .5s;
+    
+  }
+
+  nav ul li{
+    display: block;
+    margin: 50px 0;
+    line-height: 30px;    
+  }
+  nav ul li a{
+    font-size: 13px;
+
+  }
+
+  #check:checked ~ ul{
+    left: 0;
+  }
+
+  #check:checked ~ label #btn{
+    display: none;
+    
+  }
+
+  #check:checked ~ label #cancel{
+    display: block;
+  }
+}
+
