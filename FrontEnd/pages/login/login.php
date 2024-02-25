@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="./pages/login/login.php">
+    <link rel="stylesheet" href="./pages/login/login.css">
 </head>
 <?php require("components/Navbar/Navbar.php") ?>
 
