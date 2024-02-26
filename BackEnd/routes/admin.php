@@ -6,9 +6,6 @@
         case '/admin/delete_user':
             delete_user();
         break;
-        case '/admin/update_user':
-            update_user();
-        break;
         case '/admin/delete_organisers':
         break;
         case'/admin/update_organiser':
