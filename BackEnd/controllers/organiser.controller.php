@@ -2,7 +2,7 @@
     require("./function/DBConnection.php");
 
     // This function Creates a threads
-    function create_threads(){
+    function create_threads():void{
         header('Access-Control-Allow-Origin: http://localhost:8888');
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type');
@@ -56,12 +56,12 @@
 
     // this function makes a request to the admin in order for 
     // a user to be upgraded from surface 3 to 2
-    function request_level_up(){
+    function request_level_up():void{
 
     }
 
     // this function shows all organisers
-    function show_all_organisers(){
+    function show_all_organisers():void{
         header('Access-Control-Allow-Origin: http://localhost:8888');
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type');
@@ -83,22 +83,22 @@
     }
 
     // this function updates the information from an event
-    function update_thread(){
+    function update_thread():void{
 
     }
 
     // this function deletes a particular 
-    function delete_thread(){
+    function delete_thread():void{
 
     }
 
     // this function deletes a member which is an event
-    function delete_member_thread(){
+    function delete_member_thread():void{
 
     }
 
     // this function shows all members belonging to a particular event
-    function view_member_thread(){
+    function view_member_thread():void{
 
     }
 
