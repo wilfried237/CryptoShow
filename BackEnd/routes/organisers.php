@@ -8,7 +8,7 @@
             create_threads();
         break;
         case '/organisers/show_all_organisers':
-        
+            show_all_organisers();
         break;
         default:
             echo'Page not found 404';
