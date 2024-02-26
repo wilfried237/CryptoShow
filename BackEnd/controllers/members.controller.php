@@ -1,7 +1,8 @@
 <?php
     require("./function/DBConnection.php");
     
-    function register_member(){
+    // this function registers a new member into the DB
+    function register_member(): void{
         // Enable CORS for a specific origin
         header('Access-Control-Allow-Origin: http://localhost:8888');
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
@@ -11,16 +12,18 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Check if the POST request contains the expected form fields
                 if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['phone']) && isset($_POST['password']) && isset($_POST['email'])) {
-                // Collect the form data
+                
+                    // Collect the form data
                     $firstname = $_POST['firstname'];
                     $lastname = $_POST['lastname'];
                     $phone = $_POST['phone'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
+                    $Color = $_POST['color'] || null;
                     
                     $conn = connection_to_Sqlite_DB();
                     
-                    $sql = "INSERT INTO Member(Firstname, Lastname, Passwords, Email, Phone) VALUES (:firstname, :lastname, :password, :email, :phone)";
+                    $sql = "INSERT INTO Member(Firstname, Lastname, Passwords, Email, Phone, Colour) VALUES (:firstname, :lastname, :password, :email, :phone, :color)";
                     $stmt = $conn->prepare($sql);
             
                     // Bind the named placeholders to variables
@@ -29,12 +32,13 @@
                     $stmt->bindParam(':phone', $phone);
                     $stmt->bindParam(':email', $email);
                     $stmt->bindParam(':password', $password);
-            
+                    $stmt->bindParam(':color', $Color);
+
                     // Execute the statement and handle the result
                     if ($stmt->execute()) {
                         echo json_encode(array('status' => 'success', 'firstname' => $firstname));
                     } else {
-                        echo json_encode(array('status' => 'error' ));
+                        echo json_encode(array('status' => 'error', 'message'=> 'failed to register'));
                     }
                 }
         } 
@@ -47,7 +51,9 @@
         }
 
     }
-    function login_member(){
+
+    // this function login a new member into the system
+    function login_member(): void{
         // Enable CORS for a specific origin
         header('Access-Control-Allow-Origin: http://localhost:8888');
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
@@ -84,7 +90,8 @@
         }
     }
     
-    function show_all_member(){
+    // this function shows all the members
+    function show_all_member():void{
 
         header('Access-Control-Allow-Origin: http://localhost:8888');
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
@@ -105,95 +112,75 @@
         echo json_encode(array("status"=> "success","users"=> $user_hash_map));
     }   
 
-    function book_threads(){
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if(isset($_POST['Member_id']) && isset($_POST['threads_id'])){
-                
-                $member_id = $_POST['Member_id'];
-                $threads_id = $_POST['threads_id'];
+    // this function verifies if a user is a user
+    function isMember(int $id): array{
+        $conn = connection_to_Sqlite_DB();
 
-                $conn = connection_to_Sqlite_DB();
-
-                $member_sql = 'SELECT * FROM Member WHERE Member_id= :Member_id;';
-                $member_stmt = $conn->prepare($member_sql);
-                $member_stmt->bindValue(':Member_id', $member_id);
-                $member_result = $member_stmt->execute();
-                $member = $member_result->fetchArray(SQLITE3_ASSOC);
-                if($member){
-                    $threads_sql  = 'SELECT * FROM Thread WHERE Thread_id= :Thread_id;';
-                    $threads_stmt = $conn->prepare($threads_sql);
-                    $threads_stmt->bindValue(':Threads_id', $threads_id);
-                    $threads_result = $threads_stmt->execute();
-                    $threads = $threads_result->fetchArray(SQLITE3_ASSOC);
-                    
-                    if($threads){
-                        $threads_member_1_sql = 'SELECT * FROM Thread_register WHERE Thread_id= :thread_id AND Member_id = :member_id';
-                        $threads_member_1_stmt = $conn->prepare($threads_member_1_sql);
-                        $threads_member_1_stmt->bindValue('thread_id',$threads_id);
-                        $threads_member_1_stmt->bindValue(':member_id',$member_id);
-                        $threads_member_1_result = $threads_member_1_stmt->execute();
-                        $threads_member_1 = $threads_member_1_result->fetchArray(SQLITE3_ASSOC);
-                       
-                        if(!$threads_member_1){
-
-                            if($threads['Threads'])
-                            {
-                                $threads_member_sql = 'INSERT INTO Thread_register VALUES (:Threads_id,:Member_id)';
-                                $threads_member_stmt = $conn->prepare($threads_member_sql);
-                                $threads_member_stmt->bindParam(':Threads_id', $threads_id);
-                                $threads_member_stmt->bindParam(':Member_id', $member_id);
-        
-                                if($threads_member_stmt->execute()){
-                                    echo json_encode(array('status'=> 'success','message'=> 'Booking is successfull'));
-                                }
-                                else{     
-                                    echo json_encode(array('status'=> 'error','message'=> 'Something when wrong, Booking failed'));
-                                }
-                            }
-
-                        }
-                        else{
-                            http_response_code(401);
-                            echo json_encode(array('status'=> 'error','message'=> 'You are already booked into the system'));
-                        }
-
-                    }
-                    else{
-                        http_response_code(401);
-                        $response = array('status'=> 'error','message'=> 'Thread do not exist');
-                        echo json_encode($response);
-                    }
-                }
-                else{
-                    http_response_code(401);
-                    $response = array('status'=> 'error','message'=> 'User do not exist');
-                    echo json_encode($response);
-                }
-
-            }   
-            else{
-                http_response_code(400); // Bad Request
-                $response = array('status' => 'error', 'message' => 'Invalid Request');
-                echo json_encode($response);
-            }
+        $member_sql = 'SELECT * FROM Member WHERE Member_id= :Member_id;';
+        $member_stmt = $conn->prepare($member_sql);
+        $member_stmt->bindValue(':Member_id', $id);
+        $member_result = $member_stmt->execute();
+        $member = $member_result->fetchArray(SQLITE3_ASSOC);
+        if($member){
+            return array('status'=> true,'user'=> $member);
+        }
+        else{
+            return array('status'=> false,'user'=> null);
         }
     }
 
-    function show_all_threads(){
-        header('Access-Control-Allow-Origin: http://localhost:8888');
-        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-        header('Access-Control-Allow-Headers: Content-Type');
-        header('Content-Type: application/json');
+    // this function allows the user to make some modification
+    function update_user(): void{
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if(isset($_POST['member_id'])){
+            
+            // collecting member id
+            $member_id = $_POST['member_id'];
 
-        $conn = connection_to_Sqlite_DB();
-        $sql = 'SELECT * FROM Threads';
-        $stmt = $conn->prepare($sql);
-        $result = $stmt->execute();
-        $threads_hash_map = [];
+            // connecting to the DB
+            $conn = connection_to_Sqlite_DB();
 
-        while($row = $result->fetchArray(SQLITE3_ASSOC)){
-            $threads_hash_map[$row['Thread_id']] = $row;
+            if(isMember($member_id)['status']){
+
+            // collecting previous data of user
+            $prev_member_info = isMember($member_id)['user'];
+
+            // collect the form data
+            $firstname = $_POST['firstname'] || $prev_member_info['Firstname'];
+            $lastname = $_POST['lastname'] || $prev_member_info['Lastname'];
+            $phone = $_POST['phone'] || $prev_member_info['Phone'];
+            $email = $_POST['email'] || $prev_member_info['Email'];
+            $password = $_POST['password'] || $prev_member_info['Passwords'];
+            $profilPic = $_POST['profilPic'] || $prev_member_info['Profilepic'];
+
+            $sql = 'UPDATE Member SET Firstname = :firstname, Lastname = :lastname, Email= :email, Phone= :phone, Passwords= :password, Profilepic= :profilepic WHERE Member_id=:member_id;';
+            $stmt = $conn->prepare($sql);
+            
+            // Bind the name placeholders to variables
+            $stmt->bindValue(':member_id', $member_id);
+            $stmt->bindValue(':firstname', $firstname);
+            $stmt->bindValue(':lastname', $lastname);
+            $stmt->bindValue(':phone', $phone);
+            $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':password', $password);
+            $stmt->bindValue(':profilepic', $profilPic,SQLITE3_BLOB);
+            if($stmt->execute()){
+                echo json_encode(array('status' => 'success','message'=> 'successfully updated member'));
+            }else{
+                echo json_encode(array('status' => 'error','message'=> 'failed to update member'));
+            }
+            }
+            else{
+                http_response_code(401);
+                echo json_encode(array('status'=> 'error','message'=> 'User does not exist'));
+            }
+
+
+
+            }else{
+                http_response_code(500);
+                echo json_encode(array('status'=> 'error','message'=> 'Invalid request'));
+            }
         }
-        echo json_encode(array('status' => 'success', 'Threads'=> $threads_hash_map));
     }
 ?>
