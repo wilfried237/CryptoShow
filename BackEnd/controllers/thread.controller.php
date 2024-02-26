@@ -18,9 +18,9 @@
 
                 $conn = connection_to_Sqlite_DB();
 
-                if(isMember($member_id)){
+                if(isMember($member_id)['status']){
                 
-                    if(isThread($threads_id)){
+                    if(isThread($threads_id)['status']){
                         $threads_member_1_sql = 'SELECT * FROM Thread_register WHERE Thread_id= :thread_id AND Member_id = :member_id';
                         $threads_member_1_stmt = $conn->prepare($threads_member_1_sql);
                         $threads_member_1_stmt->bindValue('thread_id',$threads_id);
@@ -105,9 +105,9 @@
 
                 $conn = connection_to_Sqlite_DB();
 
-                if(isMember($member_id)){
+                if(isMember($member_id)['status']){
                     
-                    if(isThread($threads_id)){
+                    if(isThread($threads_id)['status']){
                         $threads_member_1_sql = 'SELECT * FROM Thread_register WHERE Thread_id= :thread_id AND Member_id = :member_id;';
                         $threads_member_1_stmt = $conn->prepare($threads_member_1_sql);
                         $threads_member_1_stmt->bindValue('thread_id',$threads_id);
@@ -170,7 +170,7 @@
     }
 
     // this function verifies if a thread is a thread
-    function isThread(int $thread_id): bool{
+    function isThread(int $thread_id): array{
         $conn = connection_to_Sqlite_DB();
         $threads_sql  = 'SELECT * FROM Thread WHERE Thread_id= :Thread_id;';
         $threads_stmt = $conn->prepare($threads_sql);
@@ -178,10 +178,10 @@
         $threads_result = $threads_stmt->execute();
         $threads = $threads_result->fetchArray(SQLITE3_ASSOC);
         if($threads){
-            return true;
+            return array('status'=> true,'thread'=> $threads);
         }
         else{
-            return false;
+            return array('status'=> false,'thread'=> null);
         }
     }
     
