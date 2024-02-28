@@ -10,7 +10,7 @@
       <i class="fas fa-times" id="cancel"></i>
     </label>
     
-    <img src= "/images/logo" alt="logo">
+    <img src="/images/logo" alt="logo">
     <ul class = "divScroll">
       <li><a href="/">Home</a></li>
       <li><a href="/contact">Contact</a></li>

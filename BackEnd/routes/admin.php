@@ -6,11 +6,11 @@
         case '/admin/delete_user':
             delete_user();
         break;
-        case '/admin/delete_organisers':
+        case '/admin/delete_organizer':
         break;
-        case'/admin/update_organiser':
+        case'/admin/update_organizer':
         break;
-        case '/admin/level_up_user':
+        case '/admin/level_up_organizer':
         break;  
         default:
             echo'Page not found 404';

@@ -5,6 +5,9 @@ switch ($uri) {
     case '/style/navbar':
         require('./components/Navbar/Navbar.css');
     break;
+    case '/style/register':
+        require('./pages/registration/registration.css');
+    break;
     default:
     break;
 }
