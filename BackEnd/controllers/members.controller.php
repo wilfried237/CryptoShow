@@ -1,5 +1,5 @@
 <?php
-    require("./function/DBConnection.php");
+    require_once("./function/DBConnection.php");
     
     // this function registers a new member into the DB
     function register_member(): void{
@@ -113,8 +113,8 @@
     }   
 
     // this function verifies if a user is a user
-    function isMember(int $id): array{
-        $conn = connection_to_Sqlite_DB();
+    function isMember(int $id,$connection_to_Sqlite_DB): array{
+        $conn = $connection_to_Sqlite_DB;
 
         $member_sql = 'SELECT * FROM Member WHERE Member_id= :Member_id;';
         $member_stmt = $conn->prepare($member_sql);
@@ -140,10 +140,10 @@
             // connecting to the DB
             $conn = connection_to_Sqlite_DB();
 
-            if(isMember($member_id)['status']){
+            if(isMember($member_id,$conn)['status']){
 
             // collecting previous data of user
-            $prev_member_info = isMember($member_id)['user'];
+            $prev_member_info = isMember($member_id,$conn)['user'];
 
             // collect the form data
             $firstname = $_POST['firstname'] || $prev_member_info['Firstname'];

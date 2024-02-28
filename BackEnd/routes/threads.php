@@ -4,7 +4,7 @@
     $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
     switch($uri){
-        case'/threads/create':
+        case'/threads/book':
             book_threads();
         break;
         case '/threads/cancel':

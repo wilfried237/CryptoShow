@@ -2,7 +2,7 @@ const rgsF = document.getElementById("registrationForm");
 
 rgsF.addEventListener('submit', (event) => {
     event.preventDefault();
-
+    alert("hello");
     var formData = new FormData(rgsF);
 
     fetch('http://localhost:8000/members/register', {
