@@ -4,3 +4,4 @@
         <h1>About us</h1>
     </div>
 </body>
+<?php require("components/Footer/Footer.php") ?>
