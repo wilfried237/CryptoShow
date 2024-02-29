@@ -1,6 +1,7 @@
 <?php
     require_once("./function/DBConnection.php");
     require_once("./controllers/members.controller.php");
+    require_once("./controllers/thread.controller.php");
 
     // This function Creates a threads
     function create_threads(): void {
@@ -128,14 +129,114 @@
 
     // this function updates the information from an event
     function update_thread():void{
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+        if($_SERVER['REQUEST_METHOD']==="POST"){
+            if(isset($_POST["thread_id"])&& isset($_POST["member_id"])){
+                $thread_id = $_POST["thread_id"];
+                $member_id = $_POST["member_id"];
+                
+                $conn = connection_to_Sqlite_DB();
+
+                if(isThread($thread_id, $conn)['status']){
+                    
+                    if(isMember($member_id,$conn)){
+
+                        if(isOrganizer($member_id)){
+                            
+                            // verify if the organizer is the one who created the event
+                            $organizer_sql = "SELECT * FROM Thread WHERE Thread_id = :thread_id AND Member_id = :member_id;";
+                            $organizer_stmt = $conn->prepare($organizer_sql);
+
+                            // Bind parameters
+                            $organizer_stmt->bindValue(":thread_id",$thread_id,SQLITE3_INTEGER);
+                            $organizer_stmt->bindValue(":member_id",$member_id,SQLITE3_INTEGER);
+
+                            $organizer_result= $organizer_stmt->execute();
+                            $correspond_organizer = $organizer_result->fetchArray(SQLITE3_ASSOC);
+
+                            if($correspond_organizer){
+                                
+                                // collecting data from user
+                                $ThreadInfo =  isThread($thread_id, $conn)['thread'];
+                                $name  = $_POST["thread_name"]? $_POST["thread_name"] : $ThreadInfo["Thread_name"] ;
+                                $location = $_POST["location"]? $_POST["location"] : $ThreadInfo["Venue"] ;
+                                $limit = $_POST["limit"]? $_POST["limit"] : $ThreadInfo["Limit"] ;
+
+                                $update_organizer_sql = " UPDATE Thread SET Thread_name= :name , Venue= :location, Limit= :limit WHERE Thread_id= :thread_id AND Member_id= :member_id; ";
+                                $update_organizer_stmt = $conn->prepare($update_organizer_sql);
+
+                                // Bind the name placeholders to variables
+                                $update_organizer_stmt->bindValue(':name',$name,SQLITE3_TEXT);
+                                $update_organizer_stmt->bindValue(':location',$location,SQLITE3_TEXT);
+                                $update_organizer_stmt->bindValue(':limit',$limit,SQLITE3_INTEGER);
+                                $update_organizer_stmt->bindValue(':thread_id',$thread_id,SQLITE3_INTEGER);
+                                $update_organizer_stmt->bindValue(':member_id',$member_id,SQLITE3_INTEGER);      
+
+                                if($update_organizer_stmt->execute()){
+                                    echo json_encode(array('status'=>"success", 'message'=>"Successfully modified Thread"));
+                                }
+                                else{
+                                    http_response_code(401);
+                                    echo json_encode(array('status'=>"error","message"=> "unsuccessful to modify Thread"));
+                                }
+                            }
+
+                            else{
+                                http_response_code(401);
+                                echo json_encode(array("status"=>"error", "message"=>"unauthorized you are not the creator of this Thread"));
+                            }
+
+                        }
+
+                        else{
+                            http_response_code(401);
+                            echo json_encode(array("status"=>"error", "message"=>"You are not a valid organizer"));
+                        }
+
+                    }
+
+                    else{
+                        http_response_code(401);
+                        echo json_encode(array("status"=>"error", "message"=>"You are not a member"));
+                    }
+                }
+
+                else{
+                    http_response_code(401);
+                    echo json_encode(array("status"=>"error", "message"=>"Thread does not exist"));
+                }
+
+            }
+            
+            else{
+                http_response_code(500);
+                echo json_encode(array("status"=>"error", "message"=>"require id"));
+            }
+
+        }
+
+        else{
+            http_response_code(500);
+            echo json_encode(array("status"=>"error","message"=>"Bad request"));
+        }
 
     }
 
-    // this function deletes a particular 
+    // this function deletes a particular thread
     function delete_thread():void{
-
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
     }
 
+    // this function shows all the threads created by a particular organizer
+    function show_threads_organizer():void{
+
+    }
     // this function deletes a member which is an event
     function delete_member_thread():void{
 
