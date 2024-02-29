@@ -1,28 +1,23 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
-
-.container {
-    width: 100%;
+main{
+    padding: 2rem 10rem;
     height: 100vh;
-    display: grid;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .row{
-    padding: 3rem;
     display: flex;
     flex-direction: column;
-    box-shadow:  rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    background-color: white;
-    border-radius: 5px;
+    padding: 2rem 3rem;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    justify-content: center;
+    align-items: center;
+}
+.row h2{
+    margin: 0;
+    margin-bottom: 2rem;
 }
 form{
-    display: flex;
-    flex-direction: column;
-}
-form:has(input){
-    width: 300px;
+    display: grid;
+    grid-template-columns: ;
 }

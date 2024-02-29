@@ -19,7 +19,7 @@
                     $phone = $_POST['phone'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
-                    $Color = $_POST['color'] || null;
+                    $Color = $_POST['color'] ? $_POST['color']:  null;
                     
                     $conn = connection_to_Sqlite_DB();
                     
@@ -40,6 +40,10 @@
                     } else {
                         echo json_encode(array('status' => 'error', 'message'=> 'failed to register'));
                     }
+                }
+                else{
+                    http_response_code(401);
+                    echo json_encode(array('status'=> 'error','message'=> 'need params'));
                 }
         } 
         
@@ -167,6 +171,7 @@
             if($stmt->execute()){
                 echo json_encode(array('status' => 'success','message'=> 'successfully updated member'));
             }else{
+                http_response_code(401);
                 echo json_encode(array('status' => 'error','message'=> 'failed to update member'));
             }
             }
