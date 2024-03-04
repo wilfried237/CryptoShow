@@ -1,0 +1,141 @@
+
+
+.personal-main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0rem;
+}
+.personal-profile{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #4285f4; /* Google Blue */
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    text-decoration: none;
+  }
+section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(44, 187, 99, .2)0px 50px 100px -20px, rgba(44, 187, 99, .2) 0px 30px 60px -30px;
+    max-width: max-content;
+    padding: 2rem 3rem;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 16px;
+    backdrop-filter: blur(15.6px);
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+form input{
+    border: none;
+    border-bottom: solid 2px rgb(123, 123, 123);
+    width: 100%;
+    padding-bottom: 0.5rem;
+    transition: all 0.3s ease-in-out;
+    font-weight: 700;
+}
+form:has(button) button{
+    background-color: #c2fbd7;
+    border-radius: 100px;
+    box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+    color: green;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: min-content;
+}
+form:has(button) button:hover{
+    box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+    rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,
+    rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,
+    rgba(44,187,99,.25) 0 16px 32px;
+    transform: scale(1.05) rotate(-1deg);
+}
+form input:focus{
+    border-bottom: solid 2px rgba(44, 187, 99, .2);
+    outline: none;
+}
+form input::placeholder{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+#logOutBtn {
+    background-color: #ff7f7f; /* Nice Red Color */
+    border-radius: 100px;
+    box-shadow: rgba(255, 127, 127, 0.2) 0 -25px 18px -14px inset, rgba(255, 127, 127, 0.15) 0 1px 2px, rgba(255, 127, 127, 0.15) 0 2px 4px, rgba(255, 127, 127, 0.15) 0 4px 8px, rgba(255, 127, 127, 0.15) 0 8px 16px, rgba(255, 127, 127, 0.15) 0 16px 32px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: min-content;
+    height: min-content;
+}
+
+#logOutBtn:hover {
+    box-shadow: rgba(255, 127, 127, 0.35) 0 -25px 18px -14px inset,
+                rgba(255, 127, 127, 0.25) 0 1px 2px,
+                rgba(255, 127, 127, 0.25) 0 2px 4px,
+                rgba(255, 127, 127, 0.25) 0 4px 8px,
+                rgba(255, 127, 127, 0.25) 0 8px 16px,
+                rgba(255, 127, 127, 0.25) 0 16px 32px;
+    transform: scale(1.05) rotate(-1deg);
+}
+.personal-pp-lgt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5rem;
+}
+.personal-pp{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.personal-FNLN-ud p{
+    margin: 0;
+}
+.personal-FNLN-ud p:nth-child(2){
+    font-size:x-small ;
+    color: #878691;
+}
+.personal-FNLN{
+    margin-bottom: 5px !important;
+    font-weight: 500;
+}
