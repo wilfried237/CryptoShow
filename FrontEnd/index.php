@@ -10,6 +10,7 @@
         '/threads'=>'./pages/threads/threads.php',
         '/login'=>'./pages/login/login.php',
         '/register'=> './pages/registration/registration.php',
+        '/personalAccount'=> './pages/personalAccount/personal.php',
         '/style'=>'./routes/style.routes.php',
         '/images'=> './routes/images.routes.php',
         '/javascript'=> './routes/javascript.routes.php',
