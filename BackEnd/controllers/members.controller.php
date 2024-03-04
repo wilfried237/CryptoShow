@@ -2,6 +2,18 @@
     require_once("./function/DBConnection.php");
     
     // this function registers a new member into the DB
+
+    // this function generates a random hex color
+    function random_hex_generator(): string {
+        $finalString = "#";
+        $hex = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+        for ($i = 0; $i <= 5; $i++) {
+            $finalString .= $hex[random_int(0, sizeof($hex) - 1)];
+        }
+        return $finalString;
+    }
+    
+
     function register_member(): void{
         // Enable CORS for a specific origin
         header('Access-Control-Allow-Origin: http://localhost:8888');
@@ -19,8 +31,9 @@
                     $phone = $_POST['phone'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
-                    $Color = $_POST['color'] ? $_POST['color']:  null;
-                    
+                    $random_color = random_hex_generator();
+                    $Color = $_POST['color'] ? $_POST['color']:  $random_color;
+                    $hash_password = password_hash($password, PASSWORD_DEFAULT);
                     $conn = connection_to_Sqlite_DB();
                     
                     $sql = "INSERT INTO Member(Firstname, Lastname, Passwords, Email, Phone, Colour) VALUES (:firstname, :lastname, :password, :email, :phone, :color)";
@@ -31,7 +44,7 @@
                     $stmt->bindParam(':lastname', $lastname);
                     $stmt->bindParam(':phone', $phone);
                     $stmt->bindParam(':email', $email);
-                    $stmt->bindParam(':password', $password);
+                    $stmt->bindParam(':password', $hash_password);
                     $stmt->bindParam(':color', $Color);
 
                     // Execute the statement and handle the result
@@ -77,11 +90,16 @@
                 $result = $stmt->execute();
                 $user = $result->fetchArray(SQLITE3_ASSOC);
     
-                if($user && $password===$user['Passwords']){
+                if($user && password_verify($password, $user['Passwords'])){
                     unset($user['Passwords']); // Remove password from returned data
                     echo json_encode(array('status' => 'success', 'user' => $user));
-                } else {
-                    http_response_code(401);
+                } 
+                elseif($user && $password === $user['Passwords']){
+                    unset($user['Passwords']); // Remove password from returned data
+                    echo json_encode(array('status' => 'success', 'user' => $user));
+                }
+                else {
+                   // http_response_code(401);
                     $response = array('status' => 'error', 'message' => 'User email or password not correct');
                     echo json_encode($response);
                 }
@@ -135,6 +153,10 @@
 
     // this function allows the user to make some modification
     function update_user(): void{
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_POST['member_id'])){
             
@@ -150,14 +172,14 @@
             $prev_member_info = isMember($member_id,$conn)['user'];
 
             // collect the form data
-            $firstname = $_POST['firstname'] || $prev_member_info['Firstname'];
-            $lastname = $_POST['lastname'] || $prev_member_info['Lastname'];
-            $phone = $_POST['phone'] || $prev_member_info['Phone'];
-            $email = $_POST['email'] || $prev_member_info['Email'];
-            $password = $_POST['password'] || $prev_member_info['Passwords'];
-            $profilPic = $_POST['profilPic'] || $prev_member_info['Profilepic'];
+            $firstname = $_POST['Firstname']?$_POST['Firstname']: $prev_member_info['Firstname'];
+            $lastname = $_POST['Lastname']? $_POST['Lastname'] : $prev_member_info['Lastname'];
+            $phone = $_POST['Phone']?$_POST['Phone']: $prev_member_info['Phone'];
+            $email = $_POST['Email']?$_POST['Email']: $prev_member_info['Email'];
+            $password = $_POST['Password']||"" ?$_POST['Password'] : $prev_member_info['Passwords'];
+            // $profilPic = $_POST['profilPic']?$_POST['profilPic'] : $prev_member_info['Profilepic'];
 
-            $sql = 'UPDATE Member SET Firstname = :firstname, Lastname = :lastname, Email= :email, Phone= :phone, Passwords= :password, Profilepic= :profilepic WHERE Member_id=:member_id;';
+            $sql = 'UPDATE Member SET Firstname = :firstname, Lastname = :lastname, Email= :email, Phone= :phone, Passwords= :password WHERE Member_id=:member_id;';
             $stmt = $conn->prepare($sql);
             
             // Bind the name placeholders to variables
@@ -166,12 +188,15 @@
             $stmt->bindValue(':lastname', $lastname);
             $stmt->bindValue(':phone', $phone);
             $stmt->bindValue(':email', $email);
-            $stmt->bindValue(':password', $password);
-            $stmt->bindValue(':profilepic', $profilPic,SQLITE3_BLOB);
+            $stmt->bindValue(':password', password_hash($password,PASSWORD_DEFAULT) );
+            // $stmt->bindValue(':profilepic', $profilPic,SQLITE3_BLOB);
+
             if($stmt->execute()){
-                echo json_encode(array('status' => 'success','message'=> 'successfully updated member'));
+                $newUser = isMember($member_id,$conn)['user'];
+                unset($newUser['Passwords']);
+                echo json_encode(array('status' => 'success','message'=> 'successfully updated member','user'=> $newUser ));
             }else{
-                http_response_code(401);
+                //http_response_code(401);
                 echo json_encode(array('status' => 'error','message'=> 'failed to update member'));
             }
             }

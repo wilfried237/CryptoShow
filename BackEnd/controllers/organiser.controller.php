@@ -16,7 +16,7 @@
                 $name = $_POST['name'];
                 $location = $_POST['location'];
                 $Member_id = $_POST['Member_id'];
-                $date = date("h:i:sa");
+                $date = date('Y-m-d H:i:s');
                 $limit = isset($_POST['limit']) ? $_POST['limit'] : 15;
                 $conn = connection_to_Sqlite_DB();
                 
