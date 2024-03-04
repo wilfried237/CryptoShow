@@ -9,15 +9,78 @@ main{
     display: flex;
     flex-direction: column;
     padding: 2rem 3rem;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    box-shadow: rgba(44, 187, 99, .2)0px 50px 100px -20px, rgba(44, 187, 99, .2) 0px 30px 60px -30px;
+    width: 100%;
+    max-width: max-content;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 16px;
+    backdrop-filter: blur(15.6px);
+}
+.row p{
+    margin: 0;
+    margin-bottom: 2rem;
+    font-size: xx-large;
+    font-weight: 600;
+    color: #C1FBD6;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
-.row h2{
-    margin: 0;
-    margin-bottom: 2rem;
+form input{
+    border: none;
+    border-bottom: solid 2px rgb(123, 123, 123);
+    width: 100%;
+    padding-bottom: 0.5rem;
+    transition: all 0.3s ease-in-out;
+    /* color: #C1FBD6; */
+    font-weight: 700;
 }
-form{
-    display: grid;
-    grid-template-columns: ;
+form:has(button) button{
+    background-color: #c2fbd7;
+    border-radius: 100px;
+    box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+    color: green;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: min-content;
+}
+form:has(button) button:hover{
+    box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+    rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,
+    rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,
+    rgba(44,187,99,.25) 0 16px 32px;
+    transform: scale(1.05) rotate(-1deg);
+}
+
+@media (max-width:685px) {
+    .row p{
+        font-size: medium;
+        font-weight: 100;
+    }
+}
+form input:focus{
+    border-bottom: solid 2px rgba(44, 187, 99, .2) !important;
+    outline: none;
+}
+form input::placeholder{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
 }
