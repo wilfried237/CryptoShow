@@ -20,10 +20,19 @@ function abort($code = 404){
 
 }
 
-function routes_to_Controller($uri,$routes){
-    if(array_key_exists($uri, $routes)) {
-        require($routes[$uri]);
+function routes_to_Controller_front($uri,$routes){
+    if (array_key_exists($uri, $routes)) {
+        $controllerPath = $routes[$uri];
+        require($controllerPath);
     } else {
-        abort();
+        $arrayPath = explode("/", $uri);
+        $arrayPath = array_filter($arrayPath);
+        $basePath = "/" . reset($arrayPath);
+        if (array_key_exists($basePath, $routes)) {
+            $controllerPath = $routes[$basePath];
+            require($controllerPath);
+        } else {
+            abort(); // Handle case where the route is not found
+        }
     }
 }
