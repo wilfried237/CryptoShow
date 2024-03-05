@@ -1,5 +1,5 @@
 <?php
-    require("./controllers/organiser.controller.php");
+    require_once("./controllers/organiser.controller.php");
 
     $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
@@ -9,6 +9,9 @@
         break;
         case '/organisers/show_all_organisers':
             show_all_organisers();
+        break;
+        case '/organisers/request_level_up':
+            request_level_up();
         break;
         default:
             echo'Page not found 404';
