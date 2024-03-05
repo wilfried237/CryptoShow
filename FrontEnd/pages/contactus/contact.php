@@ -4,3 +4,5 @@
         <h1>Contact</h1>
     </div>
 </body>
+
+<?php require("components/Footer/Footer.php") ?>

@@ -12,6 +12,9 @@
         case '/members/':
             show_all_member();
         break;
+        case '/members/update':
+            update_user(); 
+        break;
         default:
             echo'page not found 404';
         break;
