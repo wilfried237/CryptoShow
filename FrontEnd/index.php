@@ -9,8 +9,11 @@
         '/contact'=> './pages/contactus/contact.php',
         '/threads'=>'./pages/threads/threads.php',
         '/login'=>'./pages/login/login.php',
-        '/register'=>'./pages/registration/registration.php',
+        '/register'=> './pages/registration/registration.php',
+        '/style'=>'./routes/style.routes.php',
+        '/images'=> './routes/images.routes.php',
+        '/javascript'=> './routes/javascript.routes.php',
     ];
 
-    routes_to_Controller($uri,$routes);
+    routes_to_Controller_front($uri,$routes);
 ?>

@@ -49,3 +49,5 @@
   </form>
 </body>
 </body>
+
+<?php require("components/Footer/Footer.php") ?>

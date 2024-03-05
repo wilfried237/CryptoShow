@@ -16,3 +16,5 @@
     </form>
 
 </div>
+
+<?php require("components/Footer/Footer.php") ?>
