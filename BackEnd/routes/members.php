@@ -15,6 +15,9 @@
         case '/members/update':
             update_user(); 
         break;
+        case '/members/get_by_id':
+            getUser();
+        break;
         default:
             echo'page not found 404';
         break;
