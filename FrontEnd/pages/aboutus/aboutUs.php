@@ -9,45 +9,23 @@
 />
 <link rel="stylesheet" href="./pages/aboutus/aboutUs.css" />
 </head>
-<body>
-  <form action="login.php" method="post">
-    <div class="container">
-      <header>
-        <h1>Crypto Show</h1>
-        <!-- <nav>
-          <ul>
-            <li><a href="/index.html">Home</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropbtn">Events</a>
-              <div class="dropdown-content">
-                <a href="eventListing.html">Upcoming Events</a>
-              </div>
-            </li>
-            <li><a href="/AboutUs.html">About Us</a></li>
-            <li>
-              <a class="highlight" href="/login.html">Sign In</a>
-            </li>
-            <li>
-              <input type="text" id="search" placeholder="Search.." li />
-            </li>
-          </ul>
-        </nav> -->
-      </header>
-      <div class="hero">
-        <div class="box1">
-          <h1>What we do here at Crypto Show</h1>
-          <p>
-            Our Aim is to make Crypto Show at the forefront of our operations.
-            We aim to provide the best possible experience for our customers
-            and provide them with the best possible experience. We are here to
-            help
-          </p>
-        </div>
-        <div class="random-image"></div>
-      </div>
-    </div>
-  </form>
-</body>
-</body>
+<main class="aboutus-main">
+  <section class="aboutus-section">
+    <article class ="top">
+      <div class="about-text">
+      <h1 class ="aboutus-title">About Us</h1>
+      <p > Welcome to CryptoShow, your premier destination for seamlessevent planning and booking! 
+        At CryptoShow we understand the importance of creating unforgettable experiences. Wherther 
+        you're planning to come as a guest, or host an event where you can bring your devices to showcase 
+        to everybody, our platfomr is designed to simplifty the process and connect you with the perfect 
+        venues and vednors.</p>
+      <img src="/images/top-image.jpeg">
+</div> 
+    <article>
+
+
+  </section>
+  
+</main>
 
 <?php require("components/Footer/Footer.php") ?>

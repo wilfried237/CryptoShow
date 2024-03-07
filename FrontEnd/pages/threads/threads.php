@@ -1,8 +1,81 @@
 <?php require("components/Navbar/Navbar.php") ?>
-<body>
-    <div>
-        <h1>Threads page</h1>
-      <h1>Threads page</h1>
-      <p>Sfjfadfad fadf af adf af sa fsa df asd fas df asf sa df asf sa fas fsaf as df asd fas fs a f afas df as fs ad fsa fsadfsad sfadsf dasf sa fdas fds fafdsa f asdf asd fs afa fsaf asd  fas dfad sf sadf f asdfsa fdsa fsd fa d sf asf sd faf asd fsa fd fa fsdfsa</p>
+<link rel="stylesheet" href="/style/threads">
+
+<main class="threads-main"><h1> Events </h1>
+            <section class="threads-section">
+            <article class="threads-article">
+            <img src="https://www.eventsindustryforum.co.uk/images/articles/about_the_eif.jpg" class="thread-image">
+            <div class="threads-info">
+            <div class="threads-date-location">
+            <div class="thread-date">
+            <p class="date">16</p>
+            <p class="month">SEPT</p>
+            </div>
+            <div class="thread-location">
+            <p class="title">crypto Show</p>
+            <p class="location">Leicester</p>
+            </div>
+            </div>
+            <div class="thread-book">
+            <div class="thread-profile-username">
+            <a class="threads-userProfile">WK</a>
+            <p class="thread-username">Wilfried Kamdoum</p>
+            </div>
+            <button>Book</button>
+            </div>
+            </div>
+            </article>
+            <article class="threads-article">
+            <img src="https://www.eventsindustryforum.co.uk/images/articles/about_the_eif.jpg" class="thread-image">
+            <div class="threads-info">
+            <div class="threads-date-location">
+            <div class="thread-date">
+            <p class="date">16</p>
+            <p class="month">SEPT</p>
+            </div>
+            <div class="thread-location">
+            <p class="title">crypto Show</p>
+            <p class="location">Leicester</p>
+            </div>
+            </div>
+            
+            <div class="thread-book">
+            <div class="thread-profile-username">
+            <a class="threads-userProfile">WK</a>
+            <p class="thread-username">Wilfried Kamdoum</p>
+            </div>
+            <button>Book</button>
+            </div>
+            </div>
+            </article>
+            <article class="threads-article">
+            <img src="https://www.eventsindustryforum.co.uk/images/articles/about_the_eif.jpg" class="thread-image">
+            <div class="threads-info">
+            <div class="threads-date-location">
+            <div class="thread-date">
+            <p class="date">16</p>
+            <p class="month">SEPT</p>
+            </div>
+            <div class="thread-location">
+            <p class="title">crypto Show</p>
+            <p class="location">Leicester</p>
+            </div>
+            </div>
+            
+            <div class="thread-book">
+            <div class="thread-profile-username">
+            <a class="threads-userProfile">WK</a>
+            <p class="thread-username">Wilfried Kamdoum</p>
+            <button class="button" id="button-3">Book</button>
+            <div class="button" id="button-3">
+            </div>
+    </div >
     </div>
-</body>
+    </div>
+            </article>
+  </section>
+</main>
+
+<script src="/javascript/threads"></script>
+
+<?php require("components/Footer/Footer.php") ?>
