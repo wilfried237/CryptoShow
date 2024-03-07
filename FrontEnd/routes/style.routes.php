@@ -13,6 +13,15 @@ switch ($uri) {
     case '/style/register':
         require('./pages/registration/registration.css');
     break;
+    case '/style/login':
+        require('./pages/login/login.css');
+    break;
+    case '/style/personal':
+        require('./pages/personalAccount/personal.css');
+    break;
+    case '/style/threads':
+        require('./pages/threads/threads.css');
+    break;
 
     case '/style/aboutUs':
         require('./pages/aboutUs/aboutUs.css');
