@@ -12,7 +12,7 @@
         <a href="/contact">Contact</a>
         <a href="/about">About us</a>
         <a href="/threads">Event</a>
-        <a href="#">Services</a>
+        <a href="/CreateEvent" id="CreateEvents">Create Event</a>
         <a href="/personalAccount" id="header-profile-1" class="header-profile">F</a>
         <div id="header-auth-btn" style="display: flex; flex-direction:column;">
           <button> <a href="/login"> Signin </a> </button>
