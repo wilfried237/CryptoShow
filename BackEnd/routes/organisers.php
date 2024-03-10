@@ -13,6 +13,9 @@
         case '/organisers/request_level_up':
             request_level_up();
         break;
+        case '/organisers/Show_thread':
+            show_threads_organizer();
+        break;
         default:
             echo'Page not found 404';
         break;
