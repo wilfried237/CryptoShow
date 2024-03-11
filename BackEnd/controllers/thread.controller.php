@@ -1,6 +1,7 @@
 <?php
     require_once("./function/DBConnection.php");
     require_once("./controllers/members.controller.php");
+    require_once("./controllers/organiser.controller.php");
 
     // this function books an event
     function book_threads(){
@@ -182,4 +183,39 @@
         }
     }
     
+    // this function returns the number opf participants inside a thread
+    function getParticipants():void{
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            if(isset($_POST["Organizer_id"]) && isset($_POST["Thread_id"])){
+                $conn = connection_to_Maria_DB();
+                $Organizer_ID = $_POST["Organizer_id"];
+                $Thread_ID = $_POST["Thread_id"];
+                if(isThread($Thread_ID, $conn)["status"]){
+                    if(isOrganizer($Organizer_ID)){
+                        $sql = "SELECT * FROM thread_register WHERE Thread_id= :thread_id;";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bindValue(":thread_id", $Thread_ID);
+                        $stmt->execute();
+                            $threads_hash_map = [];
+
+                            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                $threads_hash_map[$row['Member_id']] = $row;
+                            }
+                            $response = array('status' => 'success', 'threadParticipants' => $threads_hash_map , 'Participants'=> sizeof($threads_hash_map));
+                            echo json_encode($response);
+                    }
+                }
+            }
+            else{
+                http_response_code(400); // Bad Request
+                $response = array('status' => 'error', 'message' => 'Invalid Request');
+                echo json_encode($response);
+            }
+        }
+    }
 ?>

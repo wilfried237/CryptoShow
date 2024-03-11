@@ -13,6 +13,7 @@
         '/personalAccount'=> './pages/personalAccount/personal.php',
         '/threadInfo'=> './pages/threadInfo/threadInfo.php',
         '/CreateEvent'=> './pages/OrganiserThread/createEvent.php',
+        '/allMembers' => './pages/OrganiserThread/allMembers.php',
         '/style'=>'./routes/style.routes.php',
         '/images'=> './routes/images.routes.php',
         '/javascript'=> './routes/javascript.routes.php',

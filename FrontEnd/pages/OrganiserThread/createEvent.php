@@ -15,7 +15,7 @@
     </div>
 
 </div>
-<div class=" container containers mt-3 rounded-3">
+<div class=" container shadow-lg p-5 mt-3 rounded-3">
     <table class="table">
     <thead>
         <tr>
@@ -29,57 +29,6 @@
         </tr>
     </thead>
     <tbody id="tableBodyS">
-        <!-- <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>12</td>
-            <td>3</td>
-            <td>
-                <svg class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-                </svg>
-                <ul class="dropdown-menu">
-                    <li><a class="text-Primary dropdown-item" href="#">View Members</a></li>
-                    <li><a class="text-danger dropdown-item" href="#">Delete</a></li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>12</td>
-            <td>3</td>
-            <td>
-                <svg class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-                </svg>
-                <ul class="dropdown-menu">
-                    <li><a class="text-Primary dropdown-item" href="#">View Members</a></li>
-                    <li><a class="text-danger dropdown-item" href="#">Delete</a></li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>12</td>
-            <td>3</td>
-            <td>
-                <svg class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-                </svg>
-                <ul class="dropdown-menu">
-                    <li><a class="text-Primary dropdown-item" href="#">View Members</a></li>
-                    <li><a class="text-danger dropdown-item" href="#">Delete</a></li>
-                </ul>
-            </td>
-        </tr> -->
     </tbody>
     </table>
 </div>
