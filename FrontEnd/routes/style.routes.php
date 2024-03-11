@@ -17,6 +17,12 @@ switch ($uri) {
     case '/style/threads':
         require('./pages/threads/threads.css');
     break;
+  case '/style/aboutus':
+      require('./pages/aboutus/about.css');
+  break;
+  case '/style/contact':
+      require('./pages/contactus/contact.css');
+  break;
     default:
     break;
 }
