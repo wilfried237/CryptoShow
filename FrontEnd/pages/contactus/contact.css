@@ -1,3 +1,131 @@
+.contact-container{
+    width: 100%;
+    margin-top: 3rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+}
+
+.contact-header {
+  text-align: center;
+}
+
+.both {
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 50%;
+  padding: 30px;
+}
+form {
+  display: grid;
+}
+#hero-image {
+  height: 400px;
+  width: 400px;
+  justify-content: center;
+}
+
+.contact-form {
+  display: grid;
+}
+#message {
+  width: 100%;
+  height: 100px;
+}
+
+
+button {
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+@media (max-width: 1300px) {
+  #hero-image {
+    display: none;
+  }
+}
+
+form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 20px;
+}
+
+.main {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  padding: 25px;
+  height: 600px;
+  background: #b998b3;
+  border-radius: 20px;
+  margin: 0px 60px;
+}
+
+.main p {
+  max-width: 550px;
+  line-height: 2;
+}
+
+.holder {
+  padding: 50px 70px;
+}
+
+#main-image {
+  height: 250px;
+  width: 270px;
+  position: absolute;
+  top: 100px;
+  border-radius: 20px;
+  left: 800px;
+  object-fit: cover;
+  object-position: center;
+}
+
+#main-image1 {
+  height: 250px;
+  width: 150px;
+  position: absolute;
+  top: 100px;
+  border-radius: 20px;
+  left: 1120px;
+  object-fit: cover;
+  object-position:center;
+}
+
+.middle {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
+}
+
+.middle p {
+  max-width: 550px;
+  line-height: 1.5;
+  align-items: center;
+}
+
 .threads-main{
     width: 100%;
     margin-top: 3rem;
