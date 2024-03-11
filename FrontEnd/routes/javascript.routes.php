@@ -23,6 +23,9 @@ switch ($uri) {
     case '/javascript/CreateEvent':
         require('./pages/OrganiserThread/createEvent.js');
     break;
+    case '/javascript/allMembers':
+        require('./pages/OrganiserThread/allMembers.js');
+    break;
     default:
     break;
 }
