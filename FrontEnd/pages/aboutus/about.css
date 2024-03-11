@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  margin-top: 3rem;
+  justify-content: center;
+  align-items: center;
+  display: grid;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.hero-section {
+  display: grid;
+  width: 800px;
+  justify-content: center;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#hero-image {
+  height: 400px;
+  width: 400px;
+  justify-content: center;
+  object-fit: cover;
+  object-position:center;
+}
+
+.hero-section h1 {
+  justify-content: center;
+  display: grid;
+}
+
+.hero-section p {
+  padding: 20px;
+}
