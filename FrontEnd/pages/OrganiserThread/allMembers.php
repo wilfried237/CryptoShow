@@ -19,22 +19,7 @@
                     </tr>
                 </thead>
                 <tbody id="tableBodyS">
-                    <tr>
-                        <th scope="row"><p class="bg-secondary m-0 rounded-5" style="width: 50px; height: 50px;"> </p></th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>12</td>
-                        <td>moto</td>
-                        <td>
-                            <svg class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-                            </svg>
-                            <ul class="dropdown-menu">
-                                <li><a class="text-danger dropdown-item" href="#">Remove Member</a></li>
-                            </ul>
-                        </td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>

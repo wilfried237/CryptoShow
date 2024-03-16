@@ -1,7 +1,7 @@
 // function declaration
 
 function signOut(){
-    localStorage.removeItem("userInfo");
+    localStorage.clear();
 }
 
 function updateUser(formData){
