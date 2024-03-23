@@ -133,3 +133,21 @@ async function setElementTable(){
 
 
 setElementTable();
+
+const openDialogButton = document.getElementById('openDialog');
+const dialog = document.getElementById('dialog');
+const closeDialog = document.querySelector('.close');
+
+openDialogButton.addEventListener('click', function() {
+  dialog.style.display = 'block';
+});
+
+closeDialog.addEventListener('click', function() {
+  dialog.style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+  if (event.target === dialog) {
+    dialog.style.display = 'none';
+  }
+});
