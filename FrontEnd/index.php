@@ -17,4 +17,3 @@
     ];
 
     routes_to_Controller_front($uri,$routes);
-?>
