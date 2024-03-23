@@ -17,6 +17,15 @@ switch ($uri) {
     case '/javascript/threads':
         require('./pages/threads/threads.js');
     break;
+    case '/javascript/threadInfo':
+        require('./pages/threadInfo/threadInfo.js');
+    break;
+    case '/javascript/CreateEvent':
+        require('./pages/OrganiserThread/createEvent.js');
+    break;
+    case '/javascript/allMembers':
+        require('./pages/OrganiserThread/allMembers.js');
+    break;
     default:
     break;
 }

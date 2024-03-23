@@ -1,7 +1,7 @@
 <?php
     require_once("./function/DBConnection.php");
     
-    // this function registers a new member into the DB
+    
 
     // this function generates a random hex color
     function random_hex_generator(): string {
@@ -13,7 +13,7 @@
         return $finalString;
     }
     
-
+    // this function registers a new member into the DB
     function register_member(): void{
         // Enable CORS for a specific origin
         header('Access-Control-Allow-Origin: http://localhost:8888');
@@ -31,12 +31,13 @@
                     $phone = $_POST['phone'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
+                    $date = date('Y-m-d H:i:s');
                     $random_color = random_hex_generator();
                     $Color = $_POST['color'] ? $_POST['color']:  $random_color;
                     $hash_password = password_hash($password, PASSWORD_DEFAULT);
-                    $conn = connection_to_Sqlite_DB();
+                    $conn = connection_to_Maria_DB();
                     
-                    $sql = "INSERT INTO Member(Firstname, Lastname, Passwords, Email, Phone, Colour) VALUES (:firstname, :lastname, :password, :email, :phone, :color)";
+                    $sql = "INSERT INTO Member(Firstname, Lastname, Passwords, Email, Phone, Colour,Created_at) VALUES (:firstname, :lastname, :password, :email, :phone, :color,:created_at)";
                     $stmt = $conn->prepare($sql);
             
                     // Bind the named placeholders to variables
@@ -46,6 +47,7 @@
                     $stmt->bindParam(':email', $email);
                     $stmt->bindParam(':password', $hash_password);
                     $stmt->bindParam(':color', $Color);
+                    $stmt->bindParam(':created_at', $date);
 
                     // Execute the statement and handle the result
                     if ($stmt->execute()) {
@@ -82,13 +84,13 @@
                 $email = $_POST['email'];
                 $password = $_POST['password'];
     
-                $conn = connection_to_Sqlite_DB();
+                $conn = connection_to_Maria_DB();
     
                 $sql = 'SELECT * FROM Member WHERE Email = :email';
                 $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':email', $email, SQLITE3_TEXT);
-                $result = $stmt->execute();
-                $user = $result->fetchArray(SQLITE3_ASSOC);
+                $stmt->bindValue(':email', $email);
+                $stmt->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
                 if($user && password_verify($password, $user['Passwords'])){
                     unset($user['Passwords']); // Remove password from returned data
@@ -113,36 +115,37 @@
     }
     
     // this function shows all the members
-    function show_all_member():void{
-
+    function show_all_member(): void {
         header('Access-Control-Allow-Origin: http://localhost:8888');
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type');
         header('Content-Type: application/json');
-
-        $conn = connection_to_Sqlite_DB();
+    
+        $conn = connection_to_Maria_DB();
         $sql = "SELECT * FROM Member;";
         $stmt = $conn->prepare($sql);
-        $result = $stmt->execute();
+        $stmt->execute();
+        
         $user_hash_map = [];
-        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             // Do something with the data in the row
             unset($row['Passwords']);
             $user_hash_map[$row['Member_id']] = $row;
         }
         
-        echo json_encode(array("status"=> "success","users"=> $user_hash_map));
-    }   
+        echo json_encode(array("status" => "success", "users" => $user_hash_map));
+    }
+     
 
     // this function verifies if a user is a user
-    function isMember(int $id,$connection_to_Sqlite_DB): array{
-        $conn = $connection_to_Sqlite_DB;
+    function isMember(int $id,$connection_to_Maria_DB): array{
+        $conn = $connection_to_Maria_DB;
 
         $member_sql = 'SELECT * FROM Member WHERE Member_id= :Member_id;';
         $member_stmt = $conn->prepare($member_sql);
         $member_stmt->bindValue(':Member_id', $id);
-        $member_result = $member_stmt->execute();
-        $member = $member_result->fetchArray(SQLITE3_ASSOC);
+        $member_stmt->execute();
+        $member = $member_stmt->fetch(PDO::FETCH_ASSOC);
         if($member){
             return array('status'=> true,'user'=> $member);
         }
@@ -164,7 +167,7 @@
             $member_id = $_POST['member_id'];
 
             // connecting to the DB
-            $conn = connection_to_Sqlite_DB();
+            $conn = connection_to_Maria_DB();
 
             if(isMember($member_id,$conn)['status']){
 
@@ -177,9 +180,11 @@
             $phone = $_POST['Phone']?$_POST['Phone']: $prev_member_info['Phone'];
             $email = $_POST['Email']?$_POST['Email']: $prev_member_info['Email'];
             $password = $_POST['Password']||"" ?$_POST['Password'] : $prev_member_info['Passwords'];
+            $created_at = $prev_member_info['Created_at'];
+            $date = date('Y-m-d H:i:s');
             // $profilPic = $_POST['profilPic']?$_POST['profilPic'] : $prev_member_info['Profilepic'];
 
-            $sql = 'UPDATE Member SET Firstname = :firstname, Lastname = :lastname, Email= :email, Phone= :phone, Passwords= :password WHERE Member_id=:member_id;';
+            $sql = 'UPDATE Member SET Firstname = :firstname, Lastname = :lastname, Email= :email, Phone= :phone, Passwords= :password,Created_at=:created_at,Updated_at= :update_date WHERE Member_id=:member_id;';
             $stmt = $conn->prepare($sql);
             
             // Bind the name placeholders to variables
@@ -188,6 +193,8 @@
             $stmt->bindValue(':lastname', $lastname);
             $stmt->bindValue(':phone', $phone);
             $stmt->bindValue(':email', $email);
+            $stmt->bindValue(':update_date', $date);
+            $stmt->bindValue(':created_at', $created_at);
             $stmt->bindValue(':password', password_hash($password,PASSWORD_DEFAULT) );
             // $stmt->bindValue(':profilepic', $profilPic,SQLITE3_BLOB);
 
@@ -213,4 +220,46 @@
             }
         }
     }
+
+
+    function getUser(): void {
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            header('Access-Control-Allow-Origin: http://localhost:8888');
+            header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+            header('Access-Control-Allow-Headers: Content-Type');
+            header('Content-Type: application/json');
+            http_response_code(200);
+            exit;
+        }
+    
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['Member_id'])) {
+                $conn = connection_to_Maria_DB();
+                $Member_id = $_POST['Member_id'];
+                ['status'=>$status,  'user'=>$user_info] = isMember($Member_id, $conn);
+                
+                if ($status) {
+                    unset($user_info['Passwords']);
+                    echo json_encode(array('status' => 'success', 'user' => $user_info));
+                } else {
+                    http_response_code(401);
+                    echo json_encode(array('status' => 'error', 'message' => 'User does not exist'));
+                }
+            } else {
+                http_response_code(501);
+                echo json_encode(array('status' => 'error', 'message' => 'Need Params'));
+            }
+        } else {
+            http_response_code(500);
+            echo json_encode(array('status' => 'error', 'message' => 'Invalid request'));
+        }
+    }
+    
+    
 ?>
