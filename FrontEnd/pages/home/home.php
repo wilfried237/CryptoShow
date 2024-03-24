@@ -1,4 +1,4 @@
-<?php require("components/Navbar/Navbar.php") ?>
+<?php require("./components/Navbar/Navbar.php") ?>
 <link rel="stylesheet" href="/style/home">
 
 <body>

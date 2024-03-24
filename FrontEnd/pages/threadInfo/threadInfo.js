@@ -7,7 +7,7 @@ async function bookEvent(threadID , memberId){
 
     try 
     {
-        const response = await fetch("http://localhost:8000/threads/book", {
+        const response = await fetch(`${backendConn}/threads/book`, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
