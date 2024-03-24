@@ -5,7 +5,7 @@ function signOut(){
 }
 
 function updateUser(formData){
-    fetch('http://localhost:8000/members/update', {
+    fetch(`${backendConn}/members/update`, {
         method: 'POST',
         body: formData
     }).then(response => {

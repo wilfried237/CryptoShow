@@ -5,7 +5,7 @@ async function getAllThreadMember(MemberId){
     data.append('Member_id', MemberId);
 
     try {
-        const response = await fetch("http://localhost:8000/organisers/Show_thread", {
+        const response = await fetch(`${backendConn}/organisers/Show_thread`, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
@@ -45,7 +45,7 @@ async function getParticipants(ThreadsID, OrganizerID){
     data.append('Thread_id', ThreadsID);
 
     try {
-        const response = await fetch("http://localhost:8000/threads/getParticipants", {
+        const response = await fetch(`${backendConn}/threads/getParticipants`, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",

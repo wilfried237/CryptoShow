@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="00c13608-6a61-4c1b-8b4a-bf71b176bf33" name="Changes" comment="p" />
+    <list default="true" id="00c13608-6a61-4c1b-8b4a-bf71b176bf33" name="Changes" comment="p">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/components/Navbar/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/components/Navbar/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/components/Navbar/Navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/components/Navbar/Navbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/pages/OrganiserThread/createEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/pages/OrganiserThread/createEvent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/pages/home/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/pages/home/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/pages/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/pages/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/pages/personalAccount/personal.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/pages/personalAccount/personal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/pages/registration/registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/pages/registration/registration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/pages/threadInfo/threadInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/pages/threadInfo/threadInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/pages/threads/threads.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/pages/threads/threads.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +26,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="f49ac96a-13db-43c6-890c-e8019fe213d6" />
+        <option name="url" value="https://github.com/wilfried237/CryptoShow.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -25,16 +52,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Wilfried&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/TRAVAIL/PHP/CryptoShow/CryptoShow&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Wilfried",
+    "last_opened_file_path": "C:/TRAVAIL/PHP/CryptoShow/CryptoShow",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -52,10 +80,42 @@
       <updated>1710829232535</updated>
       <workItem from="1710829234296" duration="303000" />
     </task>
+    <task id="LOCAL-00001" summary="p">
+      <option name="closed" value="true" />
+      <created>1711237598183</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711237598183</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="p" />
