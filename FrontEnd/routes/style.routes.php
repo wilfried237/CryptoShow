@@ -46,6 +46,10 @@ switch ($uri) {
         require('./pages/threads/threads.css');
     break;
 
+    case '/style/admin':
+        require('./pages/admin/admin.css');
+        break;
+
     default:
     break;
 }
