@@ -54,22 +54,35 @@
         <div class="dialog-content rounded">
             <span class="close">&times;</span>
             <div class="p-5">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
+                <form id="formEvent" method="POST">
+                    <div class="mb-3">
+                        <label for="NameInput" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="NameInput" placeholder="Event Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="DateInput" class="form-label">Date</label>
+                        <input type="date" name="date" class="form-control" id="DateInput1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="LocationInput" class="form-label">Location</label>
+                        <input type="text" name="location" class="form-control" id="LocationInput" placeholder="Location">
+                    </div>
+                    <div class="mb-3">
+                        <label for="ImageInput" class="form-label">ImageURl</label>
+                        <input type="text" name="image" class="form-control" id="ImageInput" placeholder="Image Link">
+                    </div>
+                    <div class="mb-3">
+                        <label for="LimitInput" class="form-label">Limit Participants</label>
+                        <input type="number" name="limit" class="form-control" id="LimitInput" placeholder="Limit people">
+                    </div>
+                    <div class="mb-3">
+                        <label for="DescriptionTextarea" class="form-label">Description</label>
+                        <textarea name="description" class="form-control" id="DescriptionTextarea" rows="3"></textarea>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
             </div>
         </div>
 </div>

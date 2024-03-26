@@ -39,6 +39,10 @@ async function getAllThreadMember(MemberId){
     }
 }
 
+// async function createThread(){
+    
+// }
+
 async function getParticipants(ThreadsID, OrganizerID){
     const data = new URLSearchParams();
     data.append('Organizer_id', OrganizerID);
@@ -93,7 +97,6 @@ async function setElementTable(){
         const username  = document.getElementById("username");
         username.innerText = `${userInfo.Lastname}  ${userInfo.Firstname}`;
         const threadsCollection = await getAllThreadMember(userInfo.Member_id);
-
         let tableRow = Promise.all(Object.values(threadsCollection).map( async (element) => {
             const threadsParticipants = await getParticipants(element.Thread_id, userInfo.Member_id);
 
@@ -150,4 +153,33 @@ window.addEventListener('click', function(event) {
   if (event.target === dialog) {
     dialog.style.display = 'none';
   }
+});
+
+const FormEvent = document.getElementById("formEvent");
+
+FormEvent.addEventListener('submit' , (event)=>{
+    event.preventDefault();
+
+    const formEvent = new FormData(FormEvent);
+    formEvent.append("Member_id",userInfo.Member_id);
+    fetch(`${backendConn}/organisers/create`, {
+        method: 'POST',
+        body: formEvent
+    }).then(response => {
+        if (response.ok) {
+            return response.json(); // Parse the response as JSON
+        } else {
+            throw new Error('Network response was not ok.');
+        }
+    })
+    .then(data => {
+        if (data.status === 'success') { // Assuming the response contains a 'status' property
+            alert(data.message);
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 });
