@@ -18,3 +18,5 @@
     </div>
 </div>
 </body>
+
+<?php require("components/Footer/Footer.php") ?>
