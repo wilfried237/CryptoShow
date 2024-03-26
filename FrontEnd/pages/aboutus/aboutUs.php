@@ -1,15 +1,20 @@
 <?php require("components/Navbar/Navbar.php") ?>
-<link rel="stylesheet" href="/style/aboutus">
+<link rel="stylesheet" href="./pages/aboutus/aboutus.css">
 <body>
-    <div class="container">
-      <div class="hero-section">     
-      <h1>About Us</h1>
-    <p>Welcome to Crypto Show, where technology meets passion! We are dedicated to bringing together computer enthusiasts, cybersecurity experts, and history buffs to celebrate the rich heritage of computer hardware and software. Our mission is to organize and manage exhibitions that showcase the latest innovations alongside cherished relics of the past. Join us as we explore the fascinating world of cryptography and computing, igniting curiosity and fostering connections among enthusiasts worldwide.</p>
-      </div>
-      <div class="images">
-        
-      <img src="https://images.pexels.com/photos/2284169/pexels-photo-2284169.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" id="hero-image">
-      <img src="https://images.pexels.com/photos/3184430/pexels-photo-3184430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" id="hero-image">
+<div class="row">
+    <div class="column">
+        <img id="one" src="https://images.pexels.com/photos/1690351/pexels-photo-1690351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Snow" >
+  </div>
+  <div class= "hero">
+    <div class = "hero-text">
+      <h1>Who</h1>
+      <h1>we</h1>
+      <h1>are.</h1>
+      <p>Welcome to Crypto Show, where technology meets passion! We are dedicated to bringing together computer enthusiasts, cybersecurity experts, and history buffs to celebrate the rich heritage of computer hardware and software.</p>
+    </div>
+    <img id = "two" src="https://images.pexels.com/photos/20523844/pexels-photo-20523844/free-photo-of-a-vintage-telephone-on-a-table-with-a-clock.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Snow" >
+  <img class ="img1" src="https://images.pexels.com/photos/1293120/pexels-photo-1293120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
       </div>
     </div>
+</div>
 </body>
