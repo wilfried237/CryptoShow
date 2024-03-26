@@ -10,6 +10,7 @@
         '/threads'=>'./pages/threads/threads.php',
         '/login'=>'./pages/login/login.php',
         '/register'=> './pages/registration/registration.php',
+        '/admin' => './pages/admin/admin.php'
         '/personalAccount'=> './pages/personalAccount/personal.php',
         '/threadInfo'=> './pages/threadInfo/threadInfo.php',
         '/CreateEvent'=> './pages/OrganiserThread/createEvent.php',
