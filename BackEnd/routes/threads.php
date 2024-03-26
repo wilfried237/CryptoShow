@@ -10,6 +10,9 @@
         case '/threads/cancel':
             cancel_thread();
         break;
+        case '/threads/getParticipants':
+            getParticipants();
+        break;
         case '/threads/':
             show_all_threads();
         break;

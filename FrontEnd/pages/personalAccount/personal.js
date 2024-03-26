@@ -1,11 +1,11 @@
 // function declaration
 
 function signOut(){
-    localStorage.removeItem("userInfo");
+    localStorage.clear();
 }
 
 function updateUser(formData){
-    fetch('http://localhost:8000/members/update', {
+    fetch(`${backendConn}/members/update`, {
         method: 'POST',
         body: formData
     }).then(response => {

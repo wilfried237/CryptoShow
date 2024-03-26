@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "brapifra.phpserver"
+        "brapifra.phpserver",
+        "mtxr.sqltools-driver-mysql"
     ]
 }
