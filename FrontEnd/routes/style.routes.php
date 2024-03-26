@@ -13,15 +13,19 @@ switch ($uri) {
     case '/style/register':
         require('./pages/registration/registration.css');
     break;
+    
     case '/style/login':
         require('./pages/login/login.css');
     break;
+
     case '/style/personal':
         require('./pages/personalAccount/personal.css');
     break;
+
     case '/style/threads':
         require('./pages/threads/threads.css');
     break;
+
     case '/style/threadInfo':
         require('./pages/threadInfo/threadInfo.css');
     break;
@@ -37,10 +41,6 @@ switch ($uri) {
     case '/style/home':
         require('./pages/home/home.css');
     break;
-
-    case '/style/login':
-        require('./pages/login/login.css');
-    break;
     
     case '/style/event':
         require('./pages/threads/threads.css');
@@ -48,7 +48,7 @@ switch ($uri) {
 
     case '/style/admin':
         require('./pages/admin/admin.css');
-        break;
+    break;
 
     default:
     break;

@@ -1,7 +1,7 @@
 // function declaration
 
 function getAllThreads(){
-    fetch('http://localhost:8000/threads/', {
+    fetch(`${backendConn}/threads/`, {
         method: 'POST'
     }).then(response => {
         if (response.ok) {
@@ -111,7 +111,7 @@ async function getMember(id) {
     data.append('Member_id', id);
 
     try {
-        const response = await fetch("http://localhost:8000/members/get_by_id", {
+        const response = await fetch(`${backendConn}/members/get_by_id`, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
