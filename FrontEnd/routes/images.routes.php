@@ -34,8 +34,15 @@ switch ($uri) {
     case 'images/background10':
         require('');
     break;
+
+    case '/about-us/image1':
+        require('./images/top-image.jpeg')
     default:
+
     break;
+    case '/about-us/image2':
+        require('./images/top-image2.jpeg')
+    default:
 }
 
 

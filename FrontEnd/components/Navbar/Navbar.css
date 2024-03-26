@@ -79,13 +79,43 @@ nav{
   gap: 3rem;
   
 }
+
 nav a{
+  position: relative;
+  color: black ;
+}
+/* nav a{
   text-decoration: none;
   color: black;
   transition: all 0.3s ease-in-out;
 }
+
 nav a:hover{
   color: #c2fbd7;
+  
+} */
+nav a:before{
+  position: absolute;
+  display: inline-block;
+  max-width: 65px;
+  content:'';
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #c2fbd7;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s linear;
+  
+
+}
+nav a:hover::before{
+  transform: scaleX(1);
+  transform-origin: left;
+  color: #c2fbd7 ;
+
+
 }
 nav button{
   display: none;

@@ -26,3 +26,5 @@
     </section>
 </main>
 <script src="/javascript/personal"></script>
+
+<?php require("components/Footer/Footer.php") ?>
