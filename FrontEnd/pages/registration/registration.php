@@ -19,3 +19,5 @@
     </div>
 </main>
 <script src="/javascript/registration"></script>
+
+<?php require("components/Footer/Footer.php") ?>
