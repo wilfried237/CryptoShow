@@ -11,11 +11,11 @@
         '/login'=>'./pages/login/login.php',
         '/register'=> './pages/registration/registration.php',
         '/admin' => './pages/admin/admin.php'
+        '/memberAdmin' => './pages/admin_member/admin.php'
         '/personalAccount'=> './pages/personalAccount/personal.php',
         '/threadInfo'=> './pages/threadInfo/threadInfo.php',
         '/CreateEvent'=> './pages/OrganiserThread/createEvent.php',
         '/allMembers' => './pages/OrganiserThread/allMembers.php',
-        '/admin'=>'./pages/admin/admin.php',
         '/style'=>'./routes/style.routes.php',
         '/images'=> './routes/images.routes.php',
         '/javascript'=> './routes/javascript.routes.php',
