@@ -16,10 +16,6 @@
     align-items: center;
     padding: 1.2rem 10rem;
 }
-@keyframes fadeIn {
-  0%   {opacity:0%; translateX(-50px);}
-  100% {opacity: 100%; translateX(50px);}  
-}
 
 .threads-article{
     display: flex;
