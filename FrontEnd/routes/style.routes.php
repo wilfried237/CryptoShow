@@ -35,7 +35,7 @@ switch ($uri) {
     break;
 
     case '/style/contactUs':
-        require('./pages/contactUs/contactUs.css');
+        require('./pages/contactus/contact.css');
     break;
 
     case '/style/home':
@@ -49,7 +49,7 @@ switch ($uri) {
     case '/style/admin':
         require('./pages/admin/admin.css');
     break;
-
+    
     default:
     break;
 }
