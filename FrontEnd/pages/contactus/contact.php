@@ -10,27 +10,27 @@
             <hr>
             <div class="members">
                 <div class="team-mem">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkGb0KXZff72_aNYCOMxSo3wBXLUugcSQItw&usqp=CAU" alt="Mr.Greenfield">
+                    <img src="/images/team1.jpg" alt="Mr.Greenfield">
                     <h3>Mr.Greenfield</h3>
                     <p>Back-End/Front-End</p>
                 </div>
                 <div class="team-mem">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkGb0KXZff72_aNYCOMxSo3wBXLUugcSQItw&usqp=CAU" alt="Mr. Wilfred">
-                    <h3>Mr. Wilfred</h3>
+                    <img src="/images/team2.jpg" alt="Mr. Wilfred">
+                    <h3>Mr. Wilfried</h3>
                     <p>Back-End/Front-End</p>
                 </div>
                 <div class="team-mem">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkGb0KXZff72_aNYCOMxSo3wBXLUugcSQItw&usqp=CAU" alt="Mr. Leo">
+                    <img src="/images/team3.jpg" alt="Mr. Leo">
                     <h3>Mr. Leo</h3>
                     <p>Back-End</p>
                 </div>
                 <div class="team-mem">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkGb0KXZff72_aNYCOMxSo3wBXLUugcSQItw&usqp=CAU" alt="Mr. Sahil">
+                    <img src="/images/team4.jpg" alt="Mr. Sahil">
                     <h3>Mr. Sahil</h3>
                     <p>Front-End</p>
                 </div>
                 <div class="team-mem">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkGb0KXZff72_aNYCOMxSo3wBXLUugcSQItw&usqp=CAU" alt="Mr. Andrej">
+                    <img src="/images/team5.jpg" alt="Mr. Andrej">
                     <h3>Mr. Andrej</h3>
                     <p>Front-End</p>
                 </div>
