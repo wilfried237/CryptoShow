@@ -20,6 +20,8 @@
         '/admin' => './pages/admin/admin.php',
         '/memberAdmin' => './pages/admin_member/member.php',
         '/adminEvent' => './pages/admin_event/event.php',
+        '/adminDevices' => './pages/admin_devices/devices.php',
+        '/adminSetting' => './pages/admin_setting/setting.php',
     ];
 
     routes_to_Controller_front($uri,$routes);

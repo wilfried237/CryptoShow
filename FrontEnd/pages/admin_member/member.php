@@ -12,13 +12,17 @@
     </div>
     <div class="items">
     <li><i class="fa-solid fa-table-columns"></i><a href='/admin'>Dashboard</a></li>
-      <li><i class="fa-solid fa-laptop"></i><a href="#">Device</a></li>
-      <li><i class="fa-regular fa-user"></i><a href="/memberAdmin">Member</a></li>
-      <li><i class="fa-solid fa-calendar-days"></i><a href="/adminEvent">Event</a></li>
-      <li><i class="fa-solid fa-gear"></i><a href="#">Settings</a></li>
+      <li><i class="fa-solid fa-laptop"></i><a href="/adminDevices">Device</a></li>
+      <li><i class="fa-regular fa-user"></i><a href='/memberAdmin'>Member</a></li>
+      <li><i class="fa-solid fa-calendar-days"></i><a href='/adminEvent'>Event</a></li>
     </div>
   </section>
   <section id="interface">
+  <div class="navigation">
+      <h3>Member</h3>
+      <p>Crypto Show @ </p>
+      <p>Member</p>
+    </div>
     <div class="top">
       <h1>Members</h1>
       <p>Welcome, Meet our valued customer integral to our success and growth</p>
