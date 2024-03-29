@@ -12,7 +12,9 @@
                 <div class="team-mem">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkGb0KXZff72_aNYCOMxSo3wBXLUugcSQItw&usqp=CAU" alt="Mr.Greenfield">
                     <h3>Mr.Greenfield</h3>
-                    <p>Back-End/Front-End</p>
+                    <p>Big Waffler
+                        Gets stuck in traffic while walking
+                    </p>
                 </div>
                 <div class="team-mem">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkGb0KXZff72_aNYCOMxSo3wBXLUugcSQItw&usqp=CAU" alt="Mr. Wilfred">

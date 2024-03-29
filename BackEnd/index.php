@@ -1,6 +1,6 @@
 <?php 
 require("./function/function.php");
-
+require_once("./function/authentication.php");
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 $routes = [
@@ -12,6 +12,9 @@ $routes = [
     '/device'=>'./routes/device.php',
 ];
 
-routes_to_Controller($uri,$routes);
+if (in_array($uri, ['/admin', '/members', '/organisers', '/threads', '/user', '/device'])) {
+    authenticate_user();
+}
 
+routes_to_Controller($uri, $routes);
 ?>

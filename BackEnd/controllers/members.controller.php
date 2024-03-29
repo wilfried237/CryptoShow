@@ -1,5 +1,17 @@
 <?php
     require_once("./function/DBConnection.php");
+    require_once("./function/authentication.php");
+
+    function handle_members_requests() {
+        // Check authentication
+        authenticate_user();
+    
+        // Add members-specific logic here
+        echo "Members route handler";
+    
+    
+    // Call the route handler function
+    handle_members_requests();
     
     
 
@@ -260,5 +272,6 @@
             echo json_encode(array('status' => 'error', 'message' => 'Invalid request'));
         }
     }
+}
     
 ?>
