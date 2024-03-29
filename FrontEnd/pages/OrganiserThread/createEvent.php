@@ -51,7 +51,7 @@
 </div>
 
 <div id="dialog" class="dialog">
-        <div class="dialog-content rounded">
+        <div class="dialog-content rounded ">
             <span class="close">&times;</span>
             <div class="p-5">
                 <form id="formEvent" method="POST">
@@ -87,7 +87,7 @@
         </div>
 </div>
 
-<div class=" container shadow-lg p-5 mt-3 rounded-3">
+<div class=" container shadow-lg p-5 mt-3 rounded-3 mb-5">
     <table class="table">
     <thead>
         <tr>

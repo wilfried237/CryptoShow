@@ -13,7 +13,7 @@
 
 footer{
     /* position: fixed; */
-    background-color: black;
+    background-color: fff;
     width: 100%;
     bottom: 0;
     left: 0;
@@ -43,7 +43,7 @@ footer{
 
 }
 .Logo-details{
-    color: #fff;
+    color: black;
     font-size: 30px;
 
 }
@@ -134,7 +134,7 @@ footer{
 
 .link_name {
 
-    color: white;
+    color: black;
     font-size: 18px;
     font-weight: 400;
     margin-bottom: 10px;
@@ -148,7 +148,7 @@ footer{
     bottom: -2px;
     height: 1px;
     width: 25px;
-    background: white;
+    background: black;
 }
 
 .box li{
@@ -157,7 +157,7 @@ footer{
 }
 
 .box li a{
-    color: white;
+    color: black;
     font-size: 14px;
     font-weight: 350;
     text-decoration: none;
@@ -172,7 +172,7 @@ footer{
 
 .bottom-details{
     width: 100%;
-    background: rgb(20, 20, 20);
+    background: #fff;
 }
 
 .bottom_text{
@@ -186,7 +186,7 @@ footer{
 .bottom_text span, .bottom_text a {
     font-size: 14px;
     font-weight: 250;
-    color: white;
+    color: black;
     opacity: 0.8;
     text-decoration: none;
 
