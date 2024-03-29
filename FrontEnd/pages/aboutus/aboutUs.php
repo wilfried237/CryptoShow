@@ -1,5 +1,5 @@
 <?php require("components/Navbar/Navbar.php") ?>
-<link rel="stylesheet" href="./pages/aboutus/aboutus.css">
+<link rel="stylesheet" href='/style/aboutUs'>
 <body>
 <div class="row">
     <div class="column">
