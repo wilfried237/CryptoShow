@@ -23,8 +23,8 @@ html {
     background-size: cover;
   }
   
-  .all-img-one {
-    background-image: url("https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  /* .all-img-one {
+    background-image: url("https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") ;
   }
   
   
@@ -42,7 +42,7 @@ html {
   
   .all-img-five {
     background-image: url("https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-  }
+  } */
   
   #menu {
     background: black;

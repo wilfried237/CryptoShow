@@ -51,7 +51,11 @@ switch ($uri) {
     break;
 
     case '/style/admin_member':
-        require('./pages/admin_member/member.css'):
+        require('./pages/admin_member/member.css');
+        break;
+
+    case '/style/admin_event':
+        require('./pages/admin_member/member.css');
         break;
 
     default:
