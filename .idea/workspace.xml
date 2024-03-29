@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00c13608-6a61-4c1b-8b4a-bf71b176bf33" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/BackEnd/controllers/members.controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/controllers/members.controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/routes/members.php" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/routes/members.php" afterDir="false" />
-    </list>
+    <list default="true" id="00c13608-6a61-4c1b-8b4a-bf71b176bf33" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,9 +20,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Program Files\PHP 8.1.7\php.exe" />
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2dtZFSQzOQ6PXjROEygNTucysTi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -35,7 +32,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Wilfried",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/TRAVAIL/PHP/CryptoShow/CryptoShow",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -61,6 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1710829232535</updated>
       <workItem from="1710829234296" duration="856000" />
+      <workItem from="1711660914839" duration="645000" />
     </task>
     <servers />
   </component>
