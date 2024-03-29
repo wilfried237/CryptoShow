@@ -2,6 +2,7 @@ html {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
+    background-color: #eeeded;
   }
   
   .all-img-one,
@@ -42,6 +43,24 @@ html {
   
   .all-img-five {
     background-image: url("https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  }
+  .navigation {
+    display: flex;
+    align-items: center;
+    padding: 10px, 30px;
+    margin: 30px 0;
+  }
+  
+  .navigation h3 {
+    display: flex;
+    margin: 10px 20px;
+    font-size: 24px;
+    jusify-content: center;
+    align-items: center;
+  }
+  
+  .navigation p {
+    margin: 10px 5px;
   }
   
   #menu {
