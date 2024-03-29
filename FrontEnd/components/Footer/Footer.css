@@ -19,15 +19,15 @@ footer{
     left: 0;
     margin-top: 2rem;
 }
-footer::before{
+ /* footer::before{
     content: ' ';
     position: absolute;
     left: 0;
-    top: 80px;
+    bottom: 300px;
     height: 1px;
     width: 100%;
     background: #afafb6;
-}
+}  */
 .content{
     margin: auto;
     padding: 30px 40px 40px 40px;
