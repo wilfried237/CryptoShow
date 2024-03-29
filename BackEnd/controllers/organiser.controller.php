@@ -17,12 +17,15 @@
                 $location = $_POST['location'];
                 $Member_id = $_POST['Member_id'];
                 $date = $_POST['date'];
+                $image = $_POST['image'] ? $_POST['image'] : null;
+                $description = $_POST['description'] ? $_POST['description'] : null;
                 $limit = isset($_POST['limit']) ? $_POST['limit'] : 15;
+
                 $conn = connection_to_Maria_DB();
                 
                 if (isOrganizer($Member_id)) {
                     
-                    $sql_threads = "INSERT INTO Thread(Thread_name, Thread_date, Venue, `Limit`, Member_id) VALUES (:name, :date, :location, :limit, :member_id);";
+                    $sql_threads = "INSERT INTO Thread(Thread_name, Thread_date, Venue, `Limit`, Member_id,Thread_image,Thread_description) VALUES (:name, :date, :location, :limit, :member_id,:image,:description);";
 
                     $stmt_threads = $conn->prepare($sql_threads);
                     
@@ -31,6 +34,8 @@
                     $stmt_threads->bindValue(":name", $name);
                     $stmt_threads->bindValue(":limit", $limit);
                     $stmt_threads->bindValue(":date", $date);
+                    $stmt_threads->bindValue(":image",$image);
+                    $stmt_threads->bindValue(":description",$description);
                     
                     
                     if ($stmt_threads->execute()) {

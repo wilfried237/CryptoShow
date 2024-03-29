@@ -4,7 +4,7 @@ loginForm.addEventListener('submit', (event)=>{
     event.preventDefault();
 
     var formData = new FormData(loginForm);
-    fetch('http://localhost:8000/members/login', {
+    fetch(`${backendConn}/members/login`, {
         method: 'POST',
         body: formData
     }).then(response => {

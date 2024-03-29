@@ -6,7 +6,7 @@ rgsF.addEventListener('submit', (event) => {
     event.preventDefault();
     if(password.value === confirm_password.value){
         var formData = new FormData(rgsF);
-        fetch('http://localhost:8000/members/register', {
+        fetch(`${backendConn}/members/register`, {
             method: 'POST',
             body: formData
         }).then(response => {

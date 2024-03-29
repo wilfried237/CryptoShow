@@ -18,9 +18,6 @@
         case '/members/get_by_id':
             getUser();
         break;
-        case '/members/member_print':
-            member_print();
-        break;
         default:
             echo'page not found 404';
         break;

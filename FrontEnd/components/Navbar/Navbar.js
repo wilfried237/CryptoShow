@@ -6,7 +6,7 @@ const userInfo =JSON.parse(localStorage.getItem("userInfo"));
 const header = document.getElementById("header");
 const link3 = document.getElementById("CreateEvents");
 link3.style.display = "none";
-
+const backendConn = "http://localhost:8000";
 if(userInfo){
 
   userInfo.Surface===2? link3.style.display = "block":link3.style.display = "none";
