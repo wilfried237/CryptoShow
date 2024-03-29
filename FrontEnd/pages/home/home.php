@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-<?php require("./components/Navbar/Navbar.php") ?>
-<link rel="stylesheet" href="/style/home">
-=======
 <?php require("components/Navbar/Navbar.php") ?>
->>>>>>> origin/Sahil
+<link rel="stylesheet" href="/style/home">
 
 <body>
   <div class = "container">
@@ -13,7 +9,6 @@
       <p>This crypto show project that we've made it perfect for everyone! Make sure to sign up using the link above. You can view various events and make sure to attend!</p>
       </div>
     </div>
-<<<<<<< HEAD
     <div class = "main">
       <div class="both">
       <h1>We are here to get as many people moving as possible.</h1>
@@ -27,8 +22,3 @@
     </div>
   </div>
 </body>
-=======
-</body>
-
-<?php require("components/Footer/Footer.php") ?>
->>>>>>> origin/Sahil
