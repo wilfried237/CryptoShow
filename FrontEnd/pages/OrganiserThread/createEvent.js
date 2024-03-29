@@ -5,7 +5,7 @@ async function getAllThreadMember(MemberId){
     data.append('Member_id', MemberId);
 
     try {
-        const response = await fetch("http://localhost:8000/organisers/Show_thread", {
+        const response = await fetch(`${backendConn}/organisers/Show_thread`, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
@@ -39,13 +39,17 @@ async function getAllThreadMember(MemberId){
     }
 }
 
+// async function createThread(){
+    
+// }
+
 async function getParticipants(ThreadsID, OrganizerID){
     const data = new URLSearchParams();
     data.append('Organizer_id', OrganizerID);
     data.append('Thread_id', ThreadsID);
 
     try {
-        const response = await fetch("http://localhost:8000/threads/getParticipants", {
+        const response = await fetch(`${backendConn}/threads/getParticipants`, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
@@ -93,7 +97,6 @@ async function setElementTable(){
         const username  = document.getElementById("username");
         username.innerText = `${userInfo.Lastname}  ${userInfo.Firstname}`;
         const threadsCollection = await getAllThreadMember(userInfo.Member_id);
-
         let tableRow = Promise.all(Object.values(threadsCollection).map( async (element) => {
             const threadsParticipants = await getParticipants(element.Thread_id, userInfo.Member_id);
 
@@ -133,3 +136,50 @@ async function setElementTable(){
 
 
 setElementTable();
+
+const openDialogButton = document.getElementById('openDialog');
+const dialog = document.getElementById('dialog');
+const closeDialog = document.querySelector('.close');
+
+openDialogButton.addEventListener('click', function() {
+  dialog.style.display = 'block';
+});
+
+closeDialog.addEventListener('click', function() {
+  dialog.style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+  if (event.target === dialog) {
+    dialog.style.display = 'none';
+  }
+});
+
+const FormEvent = document.getElementById("formEvent");
+
+FormEvent.addEventListener('submit' , (event)=>{
+    event.preventDefault();
+
+    const formEvent = new FormData(FormEvent);
+    formEvent.append("Member_id",userInfo.Member_id);
+    fetch(`${backendConn}/organisers/create`, {
+        method: 'POST',
+        body: formEvent
+    }).then(response => {
+        if (response.ok) {
+            return response.json(); // Parse the response as JSON
+        } else {
+            throw new Error('Network response was not ok.');
+        }
+    })
+    .then(data => {
+        if (data.status === 'success') { // Assuming the response contains a 'status' property
+            alert(data.message);
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});

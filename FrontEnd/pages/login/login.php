@@ -13,3 +13,5 @@
     </div>
 </main>
 <script src="/javascript/login"></script>
+
+<?php require("components/Footer/Footer.php") ?>
