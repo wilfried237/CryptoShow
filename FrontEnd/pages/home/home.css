@@ -5,8 +5,6 @@
     display: grid;
     align-items: center;
     justify-items: center;
-    background: #faf9f9;
-    margin-top: 30px;
   }
   
   .head {
@@ -14,6 +12,7 @@
     display: grid;
     justify-items: center;
     /* background: #b54a83; */
+    margin-bottom: 50px;
   }
   
   .main {
@@ -39,6 +38,8 @@
   .para {
     display: grid;
     text-align: center;
+    line-height: 1.5;
+    margin-top: 20px;
   }
   
   .both p {
