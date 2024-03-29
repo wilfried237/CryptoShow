@@ -1,5 +1,18 @@
 <?php
     require_once("./function/DBConnection.php");
+    require_once("./function/authentication.php");
+
+    function handle_admin_requests() {
+        // Check authentication
+        authenticate_user();
+    
+        // Add admin-specific logic here
+        echo "Admin route handler";
+    
+    
+    // Call the route handler function
+    handle_admin_requests();
+    
 
     function delete_user(){
         header('Access-Control-Allow-Origin: http://localhost:8888');
@@ -180,5 +193,6 @@
             echo json_encode(array('Failed 1'));
         }
     }
+}
 
 ?>
