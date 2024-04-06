@@ -1,4 +1,6 @@
 <?php
+    require("./BackEnd/function/authentication.php");
+
     require("./controllers/admin.controller.php");
     $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 

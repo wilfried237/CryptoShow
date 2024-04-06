@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 function abort($code = 404){
     $list_of_responses = [
         404=>'pages/aborts/404.php',
@@ -23,4 +25,5 @@ function routes_to_Controller($uri,$routes){
         }
     }
 }
+
 ?>

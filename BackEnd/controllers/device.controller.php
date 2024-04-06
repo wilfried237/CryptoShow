@@ -8,15 +8,27 @@
         header('Access-Control-Allow-Headers: Content-Type');
         header('Content-Type: application/json');
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Check if the POST request contains the expected form fields
-                if(isset($_POST['Device_id']) && isset($_POST['Member_id']) && isset($_POST['Thread_id']) && isset($_POST['Device_name'])) {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            // Invalid request method
+            http_response_code(405); 
+            echo json_encode(array('status' => 'error', 'message' => 'Invalid request method'));
+            return;
+        }
+        else{
+                $requiredParams = array('Device_id','Member_id','Thread_id','Device_name');
+                foreach($requiredParams as $param){
+                    if(!isset($_POST[$param])||empty($_POST[$param])){
+                        http_response_code(401);
+                        echo json_encode(array('status'=>'error','message'=>'Empty or missing parameters'));
+                        return;
+                    }
+                }
                 
                     // Collect the form data
-                    $Device_id = $_POST['Device_id'];
-                    $Member_id = $_POST['Member_id'];
-                    $Thread_id = $_POST['Thread_id'];
-                    $Device_name = $_POST['Device_name'];
+                    $Device_id = intval($_POST['Device_id']);
+                    $Member_id = intval($_POST['Member_id']);
+                    $Thread_id = intval($_POST['Thread_id']);
+                    $Device_name = htmlspecialchars($_POST['Device_name']);
                     
                     $date = date('Y-m-d H:i:s');
 
@@ -38,10 +50,10 @@
                         $stmt = $conn->prepare($sql);
 
                         // Bind the named placeholders to variables
-                        $stmt->bindParam(':Device_id', $Device_id);
-                        $stmt->bindParam(':Member_id', $Member_id);
-                        $stmt->bindParam(':Thread_id', $Thread_id);
-                        $stmt->bindParam(':Device_name', $Device_name);
+                        $stmt->bindParam(':Device_id', $Device_id, PDO::PARAM_INT);
+                        $stmt->bindParam(':Member_id', $Member_id, PDO::PARAM_INT);
+                        $stmt->bindParam(':Thread_id', $Thread_id, PDO::PARAM_INT);
+                        $stmt->bindParam(':Device_name', $Device_name, PDO::PARAM_STR);
                         $stmt->bindParam(':Device_registered_timestamp', $date);
 
                         // Execute the statement and handle the result
@@ -52,19 +64,9 @@
                         }
                     }
 
-                }
-                else{
-                    http_response_code(401);
-                    echo json_encode(array('status'=> 'error','message'=> 'need params'));
-                }
         } 
         
-        else {
-            // Invalid request method
-            http_response_code(405); // Method Not Allowed
-            $response = array('status' => 'error', 'message' => 'Invalid request method');
-            echo json_encode($response);
-        }
+
     }
 
     function delete_device(){
@@ -73,10 +75,18 @@
         header('Access-Control-Allow-Headers: Content-Type');
         header('Content-Type: application/json');
         
-        if($_SERVER['REQUEST_METHOD']==='POST'){
-            if(isset($_POST['Device_id']) && isset($_POST['Member_id'])){
-                $Member_id = $_POST['Member_id'];
-                $Device_id = $_POST['Device_id'];
+        if($_SERVER['REQUEST_METHOD']!=='POST'){
+            http_response_code(405);
+            echo json_encode(array('status'=>'error', 'message'=>'Invalid request method'));
+        }
+        elseif($_SERVER['REQUEST_METHOD']==='POST'){
+            if(!isset($_POST['Device_id']) && isset($_POST['Member_id'])){
+                http_response_code(401);
+                echo json_encode(array('status'=>'error','message'=>"Missing or empty parameter"));
+            }
+            else{
+                $Member_id = intval($_POST['Member_id']);
+                $Device_id = intval($_POST['Device_id']);
 
 
                 
@@ -86,8 +96,8 @@
                     DELETE FROM Device WHERE Device_id = :Device_id AND Member_id = :Member_id;';
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':Member_id', $Member_id);
-                $stmt->bindParam(':Device_id', $Device_id);
+                $stmt->bindParam(':Member_id', $Member_id, PDO::PARAM_INT);
+                $stmt->bindParam(':Device_id', $Device_id, PDO::PARAM_INT);
 
                 if($stmt->execute()){
                    echo json_encode(array('Succesfully deleted device ' . $Device_id));
@@ -97,9 +107,6 @@
                         echo json_encode(array('status'=>'error','message'=>'Unsuccesful'));
                     }
                 }
-                else{
-                    echo json_encode(array('status'=>'error','message'=>"You are not authorised to delete this device"));
-                }
 
             }
             else{
@@ -107,7 +114,7 @@
             }
         }
 
-    function edit_device(){
+    /*function edit_device(){
         header('Access-Control-Allow-Origin: http://localhost:8888');
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type');
@@ -185,4 +192,72 @@
         $response = array('status' => 'error', 'message' => 'Invalid request method');
         echo json_encode($response);
     }
+}*/
+
+function edit_device() {
+    // Set CORS headers
+    header('Access-Control-Allow-Origin: http://localhost:8888');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    header('Content-Type: application/json');
+
+    // Ensure the request method is POST
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405); // Method Not Allowed
+        echo json_encode(array('status' => 'error', 'message' => 'Invalid request method'));
+        return;
     }
+
+    // Check if required parameters are present
+    $requiredParams = array('Device_id', 'Member_id', 'Thread_id', 'Device_name', 'Device_image', 'Device_description');
+    foreach ($requiredParams as $param) {
+        if (!isset($_POST[$param]) || empty($_POST[$param])) {
+            http_response_code(401);
+            echo json_encode(array('status' => 'error', 'message' => 'Missing or empty required parameter: ' . $param));
+            return;
+        }
+    }
+
+    // Validate input data (e.g., ensure integer values)
+    $Device_id = intval($_POST['Device_id']);
+    $Member_id = intval($_POST['Member_id']);
+    $Thread_id = intval($_POST['Thread_id']);
+    // Additional validation can be added for other fields
+
+    // Collect other sanitized form data
+    $Device_name = htmlspecialchars($_POST['Device_name']);
+    $Device_image = htmlspecialchars($_POST['Device_image']);
+    $Device_description = htmlspecialchars($_POST['Device_description']);
+
+    // Connect to the database
+    $conn = connection_to_Maria_DB();
+
+    // Prepare and execute the SQL statement
+    $sql = "UPDATE Device 
+            SET 
+                Member_id = :Member_id, 
+                Thread_id = :Thread_id, 
+                Device_name = :Device_name, 
+                Device_image = :Device_image, 
+                Device_description = :Device_description, 
+                Device_updated_at = :Device_updated_at
+            WHERE 
+                Device_id = :Device_id";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':Device_id', $Device_id, PDO::PARAM_INT);
+    $stmt->bindParam(':Member_id', $Member_id, PDO::PARAM_INT);
+    $stmt->bindParam(':Thread_id', $Thread_id, PDO::PARAM_INT);
+    $stmt->bindParam(':Device_name', $Device_name, PDO::PARAM_STR);
+    $stmt->bindParam(':Device_image', $Device_image, PDO::PARAM_STR);
+    $stmt->bindParam(':Device_description', $Device_description, PDO::PARAM_STR);
+    $stmt->bindValue(':Device_updated_at', date('Y-m-d H:i:s'), PDO::PARAM_STR);
+
+    if ($stmt->execute()) {
+        echo json_encode(array('status' => 'success', 'message' => $Device_name . ' has been updated'));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'Failed to update device'));
+    }
+}
+
+?>

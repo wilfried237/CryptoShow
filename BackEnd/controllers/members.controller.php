@@ -1,17 +1,5 @@
 <?php
     require_once("./function/DBConnection.php");
-    require_once("./function/authentication.php");
-
-    function handle_members_requests() {
-        // Check authentication
-        authenticate_user();
-    
-        // Add members-specific logic here
-        echo "Members route handler";
-    
-    
-    // Call the route handler function
-    handle_members_requests();
     
     
 
@@ -272,6 +260,38 @@
             echo json_encode(array('status' => 'error', 'message' => 'Invalid request'));
         }
     }
-}
     
+    function member_print(){
+        
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            if(isset($_POST['Member_id'])){
+                $Member_id = $_POST['Member_id'];
+                $conn=connection_to_Maria_DB();
+                $info = isMember($Member_id, connection_to_Sqlite_DB());
+                
+                if($info['status'] == true){
+                    // $sql = 'SELECT Member_id, Firstname, Lastname, Email, Phone, Surface FROM Member WHERE Member_id = :Member_id;                    ';
+                    // $member_stmt = $conn->prepare($sql);
+                    // $member_stmt->bindValue(':Member_id', $Member_id);
+                    // $member_result = $member_stmt->execute();
+                    // $member = $member_result->fetchArray(SQLITE3_ASSOC);
+                    $user=$info['user'];
+                    unset($user['Passwords']);
+                    echo json_encode(array($user));
+                }
+                else{
+                    echo json_encode(array('message' => "Failed 3"));
+                }
+                
+            }
+            else{
+                echo json_encode(array('message' => "Failed 2"));
+            }
+           
+
+        }
+        else{
+            echo json_encode(array('message' => "Failed 1"));
+        }
+    }
 ?>

@@ -1,4 +1,11 @@
-
+<?php
+require("./BackEnd/function/authentication.php");
+if (!is_admin()) {
+  // Redirect to the homepage or display an error message
+  header("Location: ..Frontend/index.php");
+  exit();
+}
+?>
 <head>
   
   <link rel="stylesheet" href='/style/admin'>
