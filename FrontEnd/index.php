@@ -1,5 +1,6 @@
 <?php
     require("./functions/function.php");
+    require("./BackEnd/function/authentication.php");
 
     $uri = parse_url($_SERVER['REQUEST_URI'])['path']; // seperating the url's query and path
     
