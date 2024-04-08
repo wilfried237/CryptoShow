@@ -26,14 +26,14 @@
                 if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['phone']) && isset($_POST['password']) && isset($_POST['email'])) {
                 
                     // Collect the form data
-                    $firstname = $_POST['firstname'];
-                    $lastname = $_POST['lastname'];
-                    $phone = $_POST['phone'];
-                    $email = $_POST['email'];
-                    $password = $_POST['password'];
+                    $firstname = htmlspecialchars($_POST['firstname']);
+                    $lastname = htmlspecialchars($_POST['lastname']);
+                    $phone = htmlspecialchars($_POST['phone']);
+                    $email = htmlspecialchars($_POST['email']);
+                    $password = htmlspecialchars($_POST['password']);
                     $date = date('Y-m-d H:i:s');
                     $random_color = random_hex_generator();
-                    $Color = $_POST['color'] ? $_POST['color']:  $random_color;
+                    $Color = isset($_POST['color']) ? htmlspecialchars($_POST['color']) : $random_color;
                     $hash_password = password_hash($password, PASSWORD_DEFAULT);
                     $conn = connection_to_Maria_DB();
                     
@@ -41,13 +41,13 @@
                     $stmt = $conn->prepare($sql);
             
                     // Bind the named placeholders to variables
-                    $stmt->bindParam(':firstname', $firstname);
-                    $stmt->bindParam(':lastname', $lastname);
-                    $stmt->bindParam(':phone', $phone);
-                    $stmt->bindParam(':email', $email);
-                    $stmt->bindParam(':password', $hash_password);
-                    $stmt->bindParam(':color', $Color);
-                    $stmt->bindParam(':created_at', $date);
+                    $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
+                    $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
+                    $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+                    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+                    $stmt->bindParam(':password', $hash_password, PDO::PARAM_STR);
+                    $stmt->bindParam(':color', $Color, PDO::PARAM_STR);
+                    $stmt->bindParam(':created_at', $date, PDO::PARAM_STR);
 
                     // Execute the statement and handle the result
                     if ($stmt->execute()) {
@@ -81,14 +81,14 @@
     
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if(isset($_POST['email']) && isset($_POST['password'])){
-                $email = $_POST['email'];
-                $password = $_POST['password'];
+                $email = htmlspecialchars($_POST['email']);
+                $password = htmlspecialchars($_POST['password']);
     
                 $conn = connection_to_Maria_DB();
     
                 $sql = 'SELECT * FROM Member WHERE Email = :email';
                 $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':email', $email);
+                $stmt->bindValue(':email', $email, PDO::PARAM_STR);
                 $stmt->execute();
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -143,7 +143,7 @@
 
         $member_sql = 'SELECT * FROM Member WHERE Member_id= :Member_id;';
         $member_stmt = $conn->prepare($member_sql);
-        $member_stmt->bindValue(':Member_id', $id);
+        $member_stmt->bindValue(':Member_id', $id, PDO::PARAM_INT);
         $member_stmt->execute();
         $member = $member_stmt->fetch(PDO::FETCH_ASSOC);
         if($member){
@@ -164,7 +164,7 @@
             if(isset($_POST['member_id'])){
             
             // collecting member id
-            $member_id = $_POST['member_id'];
+            $member_id = intval($_POST['member_id']);
 
             // connecting to the DB
             $conn = connection_to_Maria_DB();
@@ -175,26 +175,28 @@
             $prev_member_info = isMember($member_id,$conn)['user'];
 
             // collect the form data
-            $firstname = $_POST['Firstname']?$_POST['Firstname']: $prev_member_info['Firstname'];
-            $lastname = $_POST['Lastname']? $_POST['Lastname'] : $prev_member_info['Lastname'];
-            $phone = $_POST['Phone']?$_POST['Phone']: $prev_member_info['Phone'];
-            $email = $_POST['Email']?$_POST['Email']: $prev_member_info['Email'];
-            $password = $_POST['Password']||"" ?$_POST['Password'] : $prev_member_info['Passwords'];
+            $firstname = isset($_POST['Firstname']) ? htmlspecialchars($_POST['Firstname']) : $prev_member_info['Firstname'];
+            $lastname = isset($_POST['Lastname']) ? htmlspecialchars($_POST['Lastname']) : $prev_member_info['Lastname'];
+            $phone = isset($_POST['Phone']) ? htmlspecialchars($_POST['Phone']) : $prev_member_info['Phone'];
+            $email = isset($_POST['Email']) ? htmlspecialchars($_POST['Email']) : $prev_member_info['Email'];
+            $password = isset($_POST['Password']) ? htmlspecialchars($_POST['Password']) : $prev_member_info['Passwords'];
             $created_at = $prev_member_info['Created_at'];
             $date = date('Y-m-d H:i:s');
+
+            
             // $profilPic = $_POST['profilPic']?$_POST['profilPic'] : $prev_member_info['Profilepic'];
 
             $sql = 'UPDATE Member SET Firstname = :firstname, Lastname = :lastname, Email= :email, Phone= :phone, Passwords= :password,Created_at=:created_at,Updated_at= :update_date WHERE Member_id=:member_id;';
             $stmt = $conn->prepare($sql);
             
             // Bind the name placeholders to variables
-            $stmt->bindValue(':member_id', $member_id);
-            $stmt->bindValue(':firstname', $firstname);
-            $stmt->bindValue(':lastname', $lastname);
-            $stmt->bindValue(':phone', $phone);
-            $stmt->bindValue(':email', $email);
-            $stmt->bindValue(':update_date', $date);
-            $stmt->bindValue(':created_at', $created_at);
+            $stmt->bindValue(':member_id', $member_id, PDO::PARAM_STR);
+            $stmt->bindValue(':firstname', $firstname, PDO::PARAM_STR);
+            $stmt->bindValue(':lastname', $lastname, PDO::PARAM_STR);
+            $stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
+            $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+            $stmt->bindValue(':update_date', $date, PDO::PARAM_STR);
+            $stmt->bindValue(':created_at', $created_at, PDO::PARAM_STR);
             $stmt->bindValue(':password', password_hash($password,PASSWORD_DEFAULT) );
             // $stmt->bindValue(':profilepic', $profilPic,SQLITE3_BLOB);
 

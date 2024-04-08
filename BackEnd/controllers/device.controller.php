@@ -3,70 +3,76 @@
     
     
     function register_device(){
+        //Allows requests from http://localhost:8888
         header('Access-Control-Allow-Origin: http://localhost:8888');
+        //Specifies allowed HTTP methods
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        //Specifies allowed headers
         header('Access-Control-Allow-Headers: Content-Type');
+        //Sets response content type to JSON
         header('Content-Type: application/json');
-
+    
+        //Checks if request method is POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            // Invalid request method
+            //Invalid request method, return error
             http_response_code(405); 
             echo json_encode(array('status' => 'error', 'message' => 'Invalid request method'));
             return;
         }
-        else{
-                $requiredParams = array('Device_id','Member_id','Thread_id','Device_name');
-                foreach($requiredParams as $param){
-                    if(!isset($_POST[$param])||empty($_POST[$param])){
-                        http_response_code(401);
-                        echo json_encode(array('status'=>'error','message'=>'Empty or missing parameters'));
-                        return;
-                    }
+        else {
+            //Checks for required parameters
+            $requiredParams = array('Device_id', 'Member_id', 'Thread_id', 'Device_name');
+            foreach ($requiredParams as $param) {
+                if (!isset($_POST[$param]) || empty($_POST[$param])) {
+                    //If any required parameter is missing or empty, return error
+                    http_response_code(401);
+                    echo json_encode(array('status' => 'error', 'message' => 'Empty or missing parameters'));
+                    return;
                 }
-                
-                    // Collect the form data
-                    $Device_id = intval($_POST['Device_id']);
-                    $Member_id = intval($_POST['Member_id']);
-                    $Thread_id = intval($_POST['Thread_id']);
-                    $Device_name = htmlspecialchars($_POST['Device_name']);
-                    
-                    $date = date('Y-m-d H:i:s');
-
-                    $conn = connection_to_Maria_DB();
-
-                    // Check if the device already exists in the database
-                    $sql_check = "SELECT COUNT(*) FROM Device WHERE Device_id = :Device_id";
-                    $stmt_check = $conn->prepare($sql_check);
-                    $stmt_check->bindParam(':Device_id', $Device_id);
-                    $stmt_check->execute();
-                    $count = $stmt_check->fetchColumn();
-
-                    if ($count > 0) {
-                        // Device already exists, handle the situation accordingly
-                        echo json_encode(array('status' => 'error', 'message' => 'Device already exists'));
-                    } else {
-                        // Device does not exist, proceed with the insertion
-                        $sql = "INSERT INTO Device(Device_id, Member_id, Thread_id, Device_name, Device_registered_timestamp) VALUES (:Device_id, :Member_id, :Thread_id, :Device_name, :Device_registered_timestamp)";
-                        $stmt = $conn->prepare($sql);
-
-                        // Bind the named placeholders to variables
-                        $stmt->bindParam(':Device_id', $Device_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':Member_id', $Member_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':Thread_id', $Thread_id, PDO::PARAM_INT);
-                        $stmt->bindParam(':Device_name', $Device_name, PDO::PARAM_STR);
-                        $stmt->bindParam(':Device_registered_timestamp', $date);
-
-                        // Execute the statement and handle the result
-                        if ($stmt->execute()) {
-                            echo json_encode(array('status' => 'success', 'message' => $Device_name . ' registered to Thread: ' . $Thread_id));
-                        } else {
-                            echo json_encode(array('status' => 'error', 'message'=> 'failed to register device'));
-                        }
-                    }
-
+            }
+    
+            //Collect the form data
+            $Device_id = intval($_POST['Device_id']);
+            $Member_id = intval($_POST['Member_id']);
+            $Thread_id = intval($_POST['Thread_id']);
+            $Device_name = htmlspecialchars($_POST['Device_name']);
+    
+            //Get current timestamp
+            $date = date('Y-m-d H:i:s');
+    
+            //Connect to MariaDB
+            $conn = connection_to_Maria_DB();
+    
+            //Check if the device already exists in the database
+            $sql_check = "SELECT COUNT(*) FROM Device WHERE Device_id = :Device_id";
+            $stmt_check = $conn->prepare($sql_check);
+            $stmt_check->bindParam(':Device_id', $Device_id);
+            $stmt_check->execute();
+            $count = $stmt_check->fetchColumn();
+    
+            if ($count > 0) {
+                //Device already exists, handle the situation accordingly
+                echo json_encode(array('status' => 'error', 'message' => 'Device already exists'));
+            } else {
+                //Device does not exist, proceed with the insertion
+                $sql = "INSERT INTO Device(Device_id, Member_id, Thread_id, Device_name, Device_registered_timestamp) VALUES (:Device_id, :Member_id, :Thread_id, :Device_name, :Device_registered_timestamp)";
+                $stmt = $conn->prepare($sql);
+    
+                //Bind the named placeholders to variables
+                $stmt->bindParam(':Device_id', $Device_id, PDO::PARAM_INT);
+                $stmt->bindParam(':Member_id', $Member_id, PDO::PARAM_INT);
+                $stmt->bindParam(':Thread_id', $Thread_id, PDO::PARAM_INT);
+                $stmt->bindParam(':Device_name', $Device_name, PDO::PARAM_STR);
+                $stmt->bindParam(':Device_registered_timestamp', $date);
+    
+                //Execute the statement and handle the result
+                if ($stmt->execute()) {
+                    echo json_encode(array('status' => 'success', 'message' => $Device_name . ' registered to Thread: ' . $Thread_id));
+                } else {
+                    echo json_encode(array('status' => 'error', 'message'=> 'Failed to register device'));
+                }
+            }
         } 
-        
-
     }
 
     function delete_device(){
@@ -79,12 +85,14 @@
             http_response_code(405);
             echo json_encode(array('status'=>'error', 'message'=>'Invalid request method'));
         }
-        elseif($_SERVER['REQUEST_METHOD']==='POST'){
-            if(!isset($_POST['Device_id']) && isset($_POST['Member_id'])){
+        $requiredParams = array('Device_id', 'Member_id');
+        foreach ($requiredParams as $param) {
+            if (!isset($_POST[$param]) || empty($_POST[$param])) {
                 http_response_code(401);
-                echo json_encode(array('status'=>'error','message'=>"Missing or empty parameter"));
+                echo json_encode(array('status' => 'error', 'message' => 'Empty or missing parameters'));
+                return;
             }
-            else{
+        }
                 $Member_id = intval($_POST['Member_id']);
                 $Device_id = intval($_POST['Device_id']);
 
@@ -106,12 +114,9 @@
                     else{
                         echo json_encode(array('status'=>'error','message'=>'Unsuccesful'));
                     }
-                }
+                
 
-            }
-            else{
-                echo json_encode(array('status'=>'error','message'=>"Invalid Member_id or Device_id"));
-            }
+
         }
 
     /*function edit_device(){
