@@ -14,8 +14,8 @@
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if(isset($_POST['Member_id']) && isset($_POST['threads_id'])){
                 
-                 $member_id = $_POST['Member_id'];
-                 $threads_id = $_POST['threads_id'];
+                 $member_id = intval($_POST['Member_id']);
+                 $threads_id = intval($_POST['threads_id']);
 
                 $conn = connection_to_Maria_DB();
 
@@ -24,8 +24,8 @@
                     if(isThread($threads_id,$conn)['status']){
                         $threads_member_1_sql = 'SELECT * FROM Thread_register WHERE Thread_id= :thread_id AND Member_id = :member_id';
                         $threads_member_1_stmt = $conn->prepare($threads_member_1_sql);
-                        $threads_member_1_stmt->bindValue('thread_id',$threads_id);
-                        $threads_member_1_stmt->bindValue(':member_id',$member_id);
+                        $threads_member_1_stmt->bindValue('thread_id',$threads_id, PDO::PARAM_INT);
+                        $threads_member_1_stmt->bindValue(':member_id',$member_id, PDO::PARAM_INT);
                         $threads_member_1_stmt->execute();
                         $threads_member_1 = $threads_member_1_stmt->fetch(PDO::FETCH_ASSOC);
                        
@@ -35,7 +35,7 @@
 
                             $threads_member_2_stmt = $conn->prepare($threads_member_2_sql);
 
-                            $threads_member_2_stmt->bindValue('thread_id',$threads_id);
+                            $threads_member_2_stmt->bindValue('thread_id',$threads_id, PDO::PARAM_INT);
 
                             $threads_member_2_stmt->execute();
 
@@ -49,8 +49,8 @@
 
                                     $threads_member_sql = 'INSERT INTO thread_register (Thread_id, Member_id) VALUES (:Threads_id,:Member_id)';
                                     $threads_member_stmt = $conn->prepare($threads_member_sql);
-                                    $threads_member_stmt->bindParam(':Threads_id', $threads_id);
-                                    $threads_member_stmt->bindParam(':Member_id', $member_id);
+                                    $threads_member_stmt->bindParam(':Threads_id', $threads_id, PDO::PARAM_INT);
+                                    $threads_member_stmt->bindParam(':Member_id', $member_id, PDO::PARAM_INT);
             
                                     if($threads_member_stmt->execute()){
                                         echo json_encode(array('status'=> 'success','message'=> 'Booking is successfull'));
@@ -98,8 +98,8 @@
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if(isset($_POST['Member_id']) && isset($_POST['threads_id'])){
-                $member_id = $_POST['Member_id'];
-                $threads_id = $_POST['threads_id'];
+                $member_id = intval($_POST['Member_id']);
+                $threads_id = intval($_POST['threads_id']);
 
                 $conn = connection_to_Maria_DB();
 
@@ -108,16 +108,16 @@
                     if(isThread($threads_id,$conn)['status']){
                         $threads_member_1_sql = 'SELECT * FROM Thread_register WHERE Thread_id= :thread_id AND Member_id = :member_id;';
                         $threads_member_1_stmt = $conn->prepare($threads_member_1_sql);
-                        $threads_member_1_stmt->bindValue('thread_id',$threads_id);
-                        $threads_member_1_stmt->bindValue(':member_id',$member_id);
+                        $threads_member_1_stmt->bindValue('thread_id',$threads_id, PDO::PARAM_INT);
+                        $threads_member_1_stmt->bindValue(':member_id',$member_id, PDO::PARAM_INT);
                         $threads_member_1_stmt->execute();
                         $threads_member_1 = $threads_member_1_stmt->fetch(PDO::FETCH_ASSOC);
                        
                         if($threads_member_1){
                             $threads_member_sql = 'DELETE FROM Thread_register WHERE Thread_id = :thread_id AND Member_id = :member_id;';
                             $threads_member_stmt = $conn->prepare($threads_member_sql);
-                            $threads_member_stmt->bindParam(':thread_id', $threads_id);
-                            $threads_member_stmt->bindParam(':member_id', $member_id);
+                            $threads_member_stmt->bindParam(':thread_id', $threads_id, PDO::PARAM_INT);
+                            $threads_member_stmt->bindParam(':member_id', $member_id, PDO::PARAM_INT);
     
                             if($threads_member_stmt->execute()){
                                 echo json_encode(array('status'=> 'success','message'=> 'Cancel successfull'));
@@ -172,7 +172,7 @@
         $conn = $connection_to_Maria_DB;
         $threads_sql  = 'SELECT * FROM Thread WHERE Thread_id = :Thread_id;';
         $threads_stmt = $conn->prepare($threads_sql);
-        $threads_stmt->bindValue(':Thread_id', $thread_id);
+        $threads_stmt->bindValue(':Thread_id', $thread_id, PDO::PARAM_INT);
         $threads_stmt->execute();
         $threads = $threads_stmt->fetch(PDO::FETCH_ASSOC);
         if($threads){
@@ -193,13 +193,13 @@
         if($_SERVER['REQUEST_METHOD']=="POST"){
             if(isset($_POST["Organizer_id"]) && isset($_POST["Thread_id"])){
                 $conn = connection_to_Maria_DB();
-                $Organizer_ID = $_POST["Organizer_id"];
-                $Thread_ID = $_POST["Thread_id"];
+                $Organizer_ID = intval($_POST["Organizer_id"]);
+                $Thread_ID = intval($_POST["Thread_id"]);
                 if(isThread($Thread_ID, $conn)["status"]){
                     if(isOrganizer($Organizer_ID)){
                         $sql = "SELECT * FROM thread_register WHERE Thread_id= :thread_id;";
                         $stmt = $conn->prepare($sql);
-                        $stmt->bindValue(":thread_id", $Thread_ID);
+                        $stmt->bindValue(":thread_id", $Thread_ID, PDO::PARAM_INT);
                         $stmt->execute();
                             $threads_hash_map = [];
 
