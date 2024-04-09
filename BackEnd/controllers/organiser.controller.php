@@ -72,15 +72,15 @@
         if($_SERVER['REQUEST_METHOD']==="POST"){
             if(isset($_POST["Member_id"])){
                 // store variable
-                $member_id = $_POST["Member_id"];
+                $member_id = intval($_POST["Member_id"]);
                 $conn = connection_to_Maria_DB();
                 if(isMember($member_id, $conn)['status']){
                     if(isOrganizer($member_id)){
                         $date = date("h:i:sa");
                         $sql = "INSERT INTO Organiser_list VALUES (:member_id, :date);";
                         $stmt = $conn->prepare($sql);
-                        $stmt->bindValue(":member_id", $member_id);
-                        $stmt->bindValue(":date", $date);
+                        $stmt->bindValue(":member_id", $member_id, PDO::PARAM_INT);
+                        $stmt->bindValue(":date", $date, PDO::PARAM_STR);
                         if($stmt->execute()){
                             echo json_encode(array("status"=> "success","message"=> "Request send awaiting approval"));
                         }else{
@@ -122,7 +122,7 @@
         $conn = connection_to_Maria_DB();
         $sql = 'SELECT * FROM Member WHERE Surface=:surface_id';
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':surface_id', $surface);
+        $stmt->bindParam(':surface_id', $surface, PDO::PARAM_INT);
         $stmt->execute();
         $organiser_hash_map = array();
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -140,8 +140,8 @@
         header('Content-Type: application/json');
         if($_SERVER['REQUEST_METHOD']==="POST"){
             if(isset($_POST["thread_id"])&& isset($_POST["member_id"])){
-                $thread_id = $_POST["thread_id"];
-                $member_id = $_POST["member_id"];
+                $thread_id = intval($_POST["thread_id"]);
+                $member_id = intval($_POST["member_id"]);
                 
                 $conn = connection_to_Maria_DB();
 
@@ -248,14 +248,14 @@
         if($_SERVER['REQUEST_METHOD']==="POST"){
             if(isset($_POST["Member_id"])){
                 // storing variable obtained from Post Request
-                $Member_id = $_POST["Member_id"];
+                $Member_id = intval($_POST["Member_id"]);
                 if(isOrganizer($Member_id)){
 
                     $conn = connection_to_Maria_DB();
 
                     $sql = "SELECT * FROM thread WHERE Member_id= :Member_id;";
                     $stmt = $conn->prepare($sql);
-                    $stmt->bindValue(":Member_id", $Member_id);
+                    $stmt->bindValue(":Member_id", $Member_id, PDO::PARAM_INT);
                     $stmt->execute();
                     $threads_hash_map = [];
                     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -290,7 +290,7 @@
         $surface = 2;
         $organizer_sql = 'SELECT * FROM Member WHERE Member_id = :organizer_id AND Surface = :surface;';
         $organizer_stmt = $conn->prepare($organizer_sql);
-        $organizer_stmt->bindValue(':organizer_id', $organizer_id);
+        $organizer_stmt->bindValue(':organizer_id', $organizer_id, PDO::PARAM_INT);
         $organizer_stmt->bindValue(':surface', $surface, SQLITE3_INTEGER);
     
         $organizer_stmt->execute();
