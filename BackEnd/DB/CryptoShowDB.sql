@@ -19,6 +19,22 @@
 CREATE DATABASE IF NOT EXISTS `cryptoshowdb` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
 USE `cryptoshowdb`;
 
+-- Dumping structure for table cryptoshowdb.all_messages
+CREATE TABLE IF NOT EXISTS `all_messages` (
+  `All_messages_id` int(11) NOT NULL AUTO_INCREMENT,
+  `Member_id` int(11) NOT NULL,
+  `Message_id` int(11) NOT NULL,
+  `Message_title` varchar(50) NOT NULL,
+  `Message_desc` varchar(255) NOT NULL,
+  PRIMARY KEY (`All_messages_id`),
+  KEY `Member_id` (`Member_id`),
+  KEY `Message_id` (`Message_id`),
+  CONSTRAINT `all_messages_ibfk_1` FOREIGN KEY (`Member_id`) REFERENCES `member` (`Member_id`),
+  CONSTRAINT `all_messages_ibfk_2` FOREIGN KEY (`Message_id`) REFERENCES `message` (`Message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Data exporting was unselected.
+
 -- Dumping structure for table cryptoshowdb.device
 CREATE TABLE IF NOT EXISTS `device` (
   `Device_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -34,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `device` (
   KEY `Member_id` (`Member_id`),
   CONSTRAINT `device_ibfk_1` FOREIGN KEY (`Thread_id`) REFERENCES `thread` (`Thread_id`),
   CONSTRAINT `device_ibfk_2` FOREIGN KEY (`Member_id`) REFERENCES `member` (`Member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Data exporting was unselected.
 
@@ -51,10 +67,11 @@ CREATE TABLE IF NOT EXISTS `member` (
   `Profilepic` blob DEFAULT NULL,
   `Created_at` varchar(255) DEFAULT current_timestamp(),
   `Updated_at` varchar(255) NOT NULL DEFAULT current_timestamp(),
+  `Message_count` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`Member_id`),
   UNIQUE KEY `Email` (`Email`),
   UNIQUE KEY `Phone` (`Phone`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Data exporting was unselected.
 
@@ -73,6 +90,24 @@ CREATE TABLE IF NOT EXISTS `member_devices` (
   CONSTRAINT `member_devices_ibfk_1` FOREIGN KEY (`Member_id`) REFERENCES `member` (`Member_id`),
   CONSTRAINT `member_devices_ibfk_2` FOREIGN KEY (`Thread_id`) REFERENCES `thread` (`Thread_id`),
   CONSTRAINT `member_devices_ibfk_3` FOREIGN KEY (`Device_id`) REFERENCES `device` (`Device_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table cryptoshowdb.message
+CREATE TABLE IF NOT EXISTS `message` (
+  `Message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `Message_title` varchar(50) NOT NULL,
+  `Message_desc` varchar(255) NOT NULL,
+  `Sender_id` int(11) NOT NULL,
+  `Recipient_id` int(11) NOT NULL,
+  `Created_at` timestamp NULL DEFAULT current_timestamp(),
+  `Updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`Message_id`),
+  KEY `Recipient_id` (`Recipient_id`),
+  KEY `Sender_id` (`Sender_id`),
+  CONSTRAINT `message_ibfk_1` FOREIGN KEY (`Recipient_id`) REFERENCES `member` (`Member_id`),
+  CONSTRAINT `message_ibfk_2` FOREIGN KEY (`Sender_id`) REFERENCES `member` (`Member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Data exporting was unselected.
