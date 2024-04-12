@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `all_messages` (
   KEY `Message_id` (`Message_id`),
   CONSTRAINT `all_messages_ibfk_1` FOREIGN KEY (`Member_id`) REFERENCES `member` (`Member_id`),
   CONSTRAINT `all_messages_ibfk_2` FOREIGN KEY (`Message_id`) REFERENCES `message` (`Message_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Data exporting was unselected.
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   KEY `Sender_id` (`Sender_id`),
   CONSTRAINT `message_ibfk_1` FOREIGN KEY (`Recipient_id`) REFERENCES `member` (`Member_id`),
   CONSTRAINT `message_ibfk_2` FOREIGN KEY (`Sender_id`) REFERENCES `member` (`Member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Data exporting was unselected.
 
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `thread` (
   `Venue` varchar(255) NOT NULL,
   `Member_id` int(11) NOT NULL,
   `Thread_image` blob DEFAULT NULL,
-  `Thread_description` varchar(255) NOT NULL,
+  `Thread_description` varchar(255) DEFAULT NULL,
   `Created_at` varchar(255) NOT NULL DEFAULT current_timestamp(),
   `Updated_at` varchar(255) DEFAULT current_timestamp(),
   `Thread_Limit` int(11) DEFAULT 15,
