@@ -16,6 +16,9 @@
         case '/messages/received_messages':
             received_messages();
         break;
+        case '/messages/all_messages':
+            all_messages();
+        break;
         default:
             echo'Page not found 404';
         break;
