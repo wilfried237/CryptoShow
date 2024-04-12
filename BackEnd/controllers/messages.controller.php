@@ -50,7 +50,7 @@
     
             if($stmt->execute()){
 
-                echo json_encode(array('status'=>'success','message'=>'Succesful'));
+                echo json_encode(array('status'=>'success','message'=>'Message added to message succesfully'));
                 $Message_id = $conn->lastInsertId();
 
                 // Prepare SQL statement to insert message into All_messages table
@@ -63,7 +63,7 @@
 
                 // Execute the insert statement for All_messages table
                 if ($stmt_insert_all_messages->execute()) {
-                    echo json_encode(array('status'=>'success','message'=>'Final part succesful'));
+                    echo json_encode(array('status'=>'success','message'=>'Message added to all messages'));
                 } else {
                     echo json_encode(array('error'=>'success','message'=>'Final part unsuccesful'));
                 }
@@ -90,6 +90,48 @@
             else{
                 echo json_encode(array('status'=>'error','message'=>'Unsuccessful'));
             }
+        }
+    }
+
+    function delete_messages(){
+
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+         //If not post return error
+        if($_SERVER['REQUEST_METHOD']!=='POST'){
+            http_response_code(405);
+            echo json_encode(array('status'=>'error', 'message'=>'Invalid request method'));
+        }
+        //Checks that the parameter is given and not empty
+        if(!isset($_POST['Message_id']) || empty($_POST['Message_id'])){
+            http_response_code(401);
+            echo json_encode(array('status'=>'error','message'=>'Empty or missing parameters'));
+            return;
+        }
+        
+        //Converts value received from parameters to integer then assigns it to variables
+        //If any of the values given are not integer, variable will be set to 0
+        $Message_id = intval($_POST['Message_id']);
+        $conn = connection_to_Maria_DB();
+        $sql = 'DELETE FROM Message WHERE Message_id = :Message_id;';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':Message_id', $Message_id, PDO::PARAM_INT);
+        if($stmt->execute()){
+            echo json_encode(array('status'=>'success','message'=>'Message deleted successfully'));
+            $sql2 = 'DELETE FROM All_messages WHERE Message_id = :Message_id;';
+            $stmt2 = $conn->prepare($sql2);
+            $stmt2->bindParam(':Message_id', $Message_id, PDO::PARAM_INT);
+            if($stmt2->execute()){
+                echo json_encode(array('status'=>'success','message'=>'All_messages deleted successfully'));
+            }
+            else{
+                echo json_encode(array('status'=>'error','message'=>'Could not delete message from all_messages.'));
+            }
+        }
+        else{
+            echo json_encode(array('status'=>'error','message'=>'Could not delete message.'));
         }
     }
     
