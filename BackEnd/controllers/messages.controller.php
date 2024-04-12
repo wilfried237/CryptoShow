@@ -239,6 +239,40 @@
             echo json_encode(array('status' => 'error', 'message' => 'Error fetching messages'));
         }
     }
-    
+  
+    function all_messages(){
+
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+
+        //If not post return error
+        if($_SERVER['REQUEST_METHOD']!=='POST'){
+            http_response_code(405);
+            echo json_encode(array('status'=>'error', 'message'=>'Invalid request method'));
+        }
+
+        //connection to database
+        $conn = connection_to_Maria_DB();
+
+        //sql statement to retreve thread names
+        $sql = 'SELECT * FROM All_messages;';
+
+        //preparing sql statement
+        $stmt = $conn->prepare($sql);
+
+        //create an empty array to store messages
+        $messages=[];
+
+        //if succesful then array is filled with thread names
+        if ($stmt->execute()) {
+            $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode(array('status' => 'success', 'messages' => $messages));
+        } else {
+            echo json_encode(array('status' => 'error', 'message' => 'Error fetching messages'));
+        }
+
+    }
 
 ?>

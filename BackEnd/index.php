@@ -11,6 +11,7 @@ $routes = [
     '/user'=> './routes/user.php',
     '/device'=>'./routes/device.php',
     '/messages'=>'./routes/messages.php',
+    '/search'=>'./routes/search.php'
 ];
 
 
