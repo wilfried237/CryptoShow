@@ -25,17 +25,17 @@
                 
                 if (isOrganizer($Member_id)) {
                     
-                    $sql_threads = "INSERT INTO Thread(Thread_name, Thread_date, Venue, `Limit`, Member_id,Thread_image,Thread_description) VALUES (:name, :date, :location, :limit, :member_id,:image,:description);";
+                    $sql_threads = "INSERT INTO Thread(Thread_name, Thread_date, Venue, Thread_Limit, Member_id,Thread_image,Thread_description) VALUES (:thread_name, :thread_date, :thread_location, :thread_limit, :member_id,:thread_image,:thread_description);";
 
                     $stmt_threads = $conn->prepare($sql_threads);
                     
                     $stmt_threads->bindValue(":member_id", $Member_id);
-                    $stmt_threads->bindValue(":location", $location);
-                    $stmt_threads->bindValue(":name", $name);
-                    $stmt_threads->bindValue(":limit", $limit);
-                    $stmt_threads->bindValue(":date", $date);
-                    $stmt_threads->bindValue(":image",$image);
-                    $stmt_threads->bindValue(":description",$description);
+                    $stmt_threads->bindValue(":thread_location", $location);
+                    $stmt_threads->bindValue(":thread_name", $name);
+                    $stmt_threads->bindValue(":thread_limit", $limit);
+                    $stmt_threads->bindValue(":thread_date", $date);
+                    $stmt_threads->bindValue(":thread_image",$image);
+                    $stmt_threads->bindValue(":thread_description",$description);
                     
                     
                     if ($stmt_threads->execute()) {
