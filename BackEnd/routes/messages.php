@@ -7,6 +7,9 @@
         case '/messages/send_messages':
             send_messages();
         break;
+        case '/messages/delete_messages':
+            delete_messages();
+        break;
         case '/messages/sent_messages':
             sent_messages();
         break;
