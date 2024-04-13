@@ -1,5 +1,5 @@
   
-  * {
+  /* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -58,7 +58,7 @@
   
   .items li:hover i {
     color: white;
-  }
+  } */
   #interface {
     display: grid;
     padding: 50px 250px;
