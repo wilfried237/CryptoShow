@@ -37,6 +37,9 @@
         case '/admin/show_messages':
             show_all_messages();
         break;
+        case '/admin/show_member_messages':
+            show_member_messages();
+        break;
         default:
             echo'Page not found 404';
         break;
