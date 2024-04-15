@@ -354,4 +354,83 @@
         }
         echo json_encode(array("status"=> "success","users"=> $message_hash_map));
     }
+
+function show_member_devices(){
+    header('Access-Control-Allow-Origin: http://localhost:8888');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    header('Content-Type: application/json');
+
+    //if request method is post proceed else show error
+    if($_SERVER['REQUEST_METHOD']!=='POST'){
+        http_response_code(405);
+        echo json_encode(array('status' => 'error', 'message' => 'Invalid request method'));
+        return;
+    }
+    //if user posts member_id proceed else show error
+    if(!isset($_POST['Member_id'])||empty($_POST['Member_id'])){
+        http_response_code(401);
+        echo json_encode(array('status'=>'error','message'=>'Empty or missing parameters'));
+        return;
+    }
+    //create variable for member_id
+    $Member_id = intval($_POST['Member_id']);
+    //connect to database
+    $conn = connection_to_Maria_DB();
+    //select all from device with the selected member_id
+    $sql = 'SELECT * FROM Device WHERE Member_id = :Member_id;';
+    //prepare sql statement
+    $stmt = $conn->prepare($sql);
+    //bind placeholder member_id to variable member_id
+    $stmt->bindValue(':Member_id', $Member_id, PDO::PARAM_INT);
+    //execure sql statement
+    $stmt->execute();
+    //create hashmap to store messages
+    $device_hash_map = array();
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        //fill hashmap
+        array_push($device_hash_map, $row);
+    }
+    echo json_encode(array("status"=> "success","users"=> $device_hash_map));
+}
+
+function show_thread_devices(){
+    header('Access-Control-Allow-Origin: http://localhost:8888');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    header('Content-Type: application/json');
+
+    //if request method is post proceed else show error
+    if($_SERVER['REQUEST_METHOD']!=='POST'){
+        http_response_code(405);
+        echo json_encode(array('status' => 'error', 'message' => 'Invalid request method'));
+        return;
+    }
+    //if user posts thread_id proceed else show error
+    if(!isset($_POST['Thread_id'])||empty($_POST['Thread_id'])){
+        http_response_code(401);
+        echo json_encode(array('status'=>'error','message'=>'Empty or missing parameters'));
+        return;
+    }
+    //create variable for thread_id
+    $Thread_id = intval($_POST['Thread_id']);
+    //connect to database
+    $conn = connection_to_Maria_DB();
+    //select all from device with the selected thread_id
+    $sql = 'SELECT * FROM Device WHERE Thread_id = :Thread_id;';
+    //prepare sql statement
+    $stmt = $conn->prepare($sql);
+    //bind placeholder thread_id to variable thread_id
+    $stmt->bindValue(':Thread_id', $Thread_id, PDO::PARAM_INT);
+    //execure sql statement
+    $stmt->execute();
+    //create hashmap to store messages
+    $device_hash_map = array();
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        //fill hashmap
+        array_push($device_hash_map, $row);
+    }
+    echo json_encode(array("status"=> "success","users"=> $device_hash_map));
+}
+
 ?>
