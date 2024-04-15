@@ -9,6 +9,8 @@ $routes = [
     '/organisers'=> './routes/organisers.php',
     '/threads'=> './routes/threads.php',
     '/user'=> './routes/user.php',
+    '/search'=>'./routes/search.php',
+
 ];
 
 routes_to_Controller($uri,$routes);
