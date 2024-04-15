@@ -355,6 +355,48 @@
         echo json_encode(array("status"=> "success","users"=> $message_hash_map));
     }
 
+    function delete_member_messages(){
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+        
+        //if request method is post proceed else show error
+        if($_SERVER['REQUEST_METHOD']!=='POST'){
+            http_response_code(405);
+            echo json_encode(array('status' => 'error', 'message' => 'Invalid request method'));
+            return;
+        }
+        //if user posts Message_id proceed else show error
+        if(!isset($_POST['Message_id'])||empty($_POST['Message_id'])){
+            http_response_code(401);
+            echo json_encode(array('status'=>'error','message'=>'Empty or missing parameters'));
+            return;
+        }
+
+        //create variable for Message_id
+        $Message_id = intval($_POST['Message_id']);
+        //connect to database
+        $conn = connection_to_Maria_DB();
+        //delete from all_messages  and message with the selected member_id
+        $sql = 'DELETE FROM All_messages WHERE Member_id = :Member_id;';
+        $sql2 = 'DELETE FROM message WHERE Message_id = :Message_id;';
+        //prepare sql statement
+        $stmt = $conn->prepare($sql);
+        $stmt2 = $conn->prepare($sql2);
+        //bind placeholder message_id to variable message
+        $stmt->bindValue(':Message_id', $Message_id, PDO::PARAM_INT);
+        $stmt2->bindValue(':Message_id', $Message_id, PDO::PARAM_INT);
+        //execure sql statement
+        if($stmt->execute() && $stmt2->execute()){
+            echo json_encode(array("status"=> "success"));
+        }
+        else{
+            echo json_encode(array("status"=> "unsuccessful"));
+        }
+
+    }
+
 function show_member_devices(){
     header('Access-Control-Allow-Origin: http://localhost:8888');
     header('Access-Control-Allow-Methods: POST, GET, OPTIONS');

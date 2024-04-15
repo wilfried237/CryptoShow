@@ -46,6 +46,9 @@
         case '/admin/show_member_messages':
             show_member_messages();
         break;
+        case '/admin/delete_member_messages':
+            delete_member_messages();
+        break;
         default:
             echo'Page not found 404';
         break;
