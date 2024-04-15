@@ -27,23 +27,23 @@
             <div class="link-boxes">
                 <ul class="box">
                     <li class="link_name">Company</li>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact us</a></li>
+                    <li><a href='/'>Home</a></li>
+                    <li><a href='/about'>About Us</a></li>
+                    <li><a href='/contact'>Contact us</a></li>
 
                 </ul>
 
                 <ul class="box">
                     <li class="link_name">Event</li>
-                    <li><a href="#">Log In</a></li>
-                    <li><a href="#">Register</a></li>
-                    <li><a href="#">Booking</a></li>
+                    <li><a href='/login'>Log In</a></li>
+                    <li><a href='/register'>Register</a></li>
+                    <li><a href='/threads'>Booking</a></li>
 
                 </ul>
 
                 <ul class="box">
                     <li class="link_name">Resources</li>
-                    <li><a href="#">Help Center</a></li>
+                    <li><a href='/contact'>Help Center</a></li>
                     <li><a href="#">Server Status</a></li>
                     <li><a href="#">Blog</a></li>
                 </ul>
