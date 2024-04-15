@@ -19,8 +19,23 @@
         case '/admin/downgrade_organiser':
             downgrade_organiser();
         break;
+        case '/admin/delete_thread';
+            delete_thread();
+        break;
         case '/admin/thread_list':
             thread_list();
+        break;
+        case '/admin/show_organisers':
+            show_organisers();
+        break;
+        case '/admin/show_members':
+            show_members();
+        break;
+        case '/admin/show_devices':
+            show_devices();
+        break;
+        case '/admin/show_messages':
+            show_all_messages();
         break;
         default:
             echo'Page not found 404';

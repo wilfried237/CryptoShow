@@ -1,8 +1,6 @@
 <?php
     require_once("./function/DBConnection.php");
 
-
-
     function delete_user(){
         //Allows requests from http://localhost:8888
         header('Access-Control-Allow-Origin: http://localhost:8888');
@@ -79,7 +77,7 @@
     }
 
     function update_organiser(){
-
+        
     }
 
     function upgrade_organiser(){
@@ -265,4 +263,45 @@
 
     }
 
+    function show_organisers(){
+        show_all_organisers();
+    }
+
+    function show_members(){
+        show_all_member();
+    }
+
+    function show_devices(){
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+        
+        $conn = connection_to_Maria_DB();
+        $sql = 'SELECT * FROM Device;';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $device_hash_map = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            array_push($device_hash_map, $row);
+        }
+        echo json_encode(array("status"=> "success","users"=> $device_hash_map));
+    }
+
+    function show_all_messages(){
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+        
+        $conn = connection_to_Maria_DB();
+        $sql = 'SELECT * FROM All_messages;';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $message_hash_map = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            array_push($message_hash_map, $row);
+        }
+        echo json_encode(array("status"=> "success","users"=> $message_hash_map));
+    }
 ?>
