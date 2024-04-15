@@ -34,6 +34,12 @@
         case '/admin/show_devices':
             show_devices();
         break;
+        case '/admin/show_member_devices':
+            show_member_devices();
+        break;
+        case '/admin/show_thread_devices':
+            show_thread_devices();
+        break;
         case '/admin/show_messages':
             show_all_messages();
         break;
