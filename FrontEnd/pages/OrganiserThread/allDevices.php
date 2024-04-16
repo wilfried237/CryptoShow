@@ -9,12 +9,11 @@
             <table class="table ">
                 <thead>
                     <tr>
-                        <th scope="col">Profile</th>
-                        <th scope="col">FirstName</th>
-                        <th scope="col">LastName</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Device</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Created_at</th>
+                        <th scope="col">Updated_at</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -25,5 +24,4 @@
         </div>
     </section>
 </main>
-
-<script src="/javascript/allMembers"></script>
+<script src="/javascript/allDevice"></script>

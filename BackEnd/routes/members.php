@@ -18,6 +18,15 @@
         case '/members/get_by_id':
             getUser();
         break;
+        case '/members/request_level_up':
+            request_level_up();
+        break;
+        case'/members/updatePassword':
+            forget_Password();
+        break;
+        case '/members/hasRequested':
+            hasRequested();
+        break;
         default:
             echo'page not found 404';
         break;

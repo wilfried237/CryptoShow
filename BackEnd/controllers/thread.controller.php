@@ -166,9 +166,59 @@
         }
         echo json_encode(array('status' => 'success', 'Threads'=> $threads_hash_map));
     }
+    
+    // this function shows all the details of a particular thread
+    function get_thread_info(){
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+
+        if($_SERVER['REQUEST_METHOD']==="POST"){
+            if(isset($_POST["thread_id"]) && isset($_POST["Member_id"])){
+
+                //binding data
+                $thread_id = $_POST["thread_id"];
+                $member_id = $_POST["Member_id"];
+                $conn = connection_to_Maria_DB();
+
+                    ['status'=>$threadStatus, 'thread'=>$threadInfo] = isThread($thread_id,$conn);
+                    if($threadStatus){
+                        if(isThreadCreator($member_id,$thread_id,$conn)['status']){
+                            echo json_encode(["status"=>"success","threadInfo"=>$threadInfo]);
+                        }
+                        else{
+                            http_response_code(401);
+                            echo json_encode(array("status"=>"error", "message"=>"unauthorized you are not the creator of this Thread"));
+                        }
+                    }
+                    else{
+                        http_response_code(401);
+                        echo json_encode(array("status"=>"error", "message"=>"Thread does not exist"));
+                    }
+            }
+            else{
+                http_response_code(500);
+                echo json_encode(array("status"=>"error", "message"=>"require id"));
+            }
+        }
+        else{
+            http_response_code(500);
+            echo json_encode(["status"=> "error","message"=> "Wrong request"]);
+        }
+
+    }
+
+    /**
+     * @author Wilfried <kamdoumwilfried8@gmail.com>
+     * 
+     * this function verifies if a thread is a thread
+     * 
+     * @return  $status $user
+     */
 
     // this function verifies if a thread is a thread
-    function isThread(int $thread_id, $connection_to_Maria_DB): array{
+    function isThread(int $thread_id, PDO $connection_to_Maria_DB): array{
         $conn = $connection_to_Maria_DB;
         $threads_sql  = 'SELECT * FROM Thread WHERE Thread_id = :Thread_id;';
         $threads_stmt = $conn->prepare($threads_sql);
@@ -183,6 +233,7 @@
         }
     }
     
+
     // this function returns the number opf participants inside a thread
     function getParticipants():void{
         header('Access-Control-Allow-Origin: http://localhost:8888');

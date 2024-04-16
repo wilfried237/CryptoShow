@@ -13,6 +13,9 @@
         case '/threads/getParticipants':
             getParticipants();
         break;
+        case'/threads/get_thread_info':
+            get_thread_info();
+        break;
         case '/threads/':
             show_all_threads();
         break;

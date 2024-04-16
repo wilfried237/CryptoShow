@@ -1,6 +1,6 @@
 <?php
     require_once("./function/DBConnection.php");
-    
+    require_once("./controllers/organiser.controller.php");
     
 
     // this function generates a random hex color
@@ -71,6 +71,52 @@
 
     }
 
+    function forget_Password():void{
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            if(isset($_POST['email']) && isset($_POST['password'])){
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $hash_password = password_hash($password, PASSWORD_DEFAULT);
+                $conn = connection_to_Maria_DB();
+                $sql = 'SELECT * FROM Member WHERE Email = :email';
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':email', $email);
+                $stmt->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($user){
+                    $sql2 = 'UPDATE member
+                    SET Passwords = :passwords
+                    WHERE Email= :email;';
+                    $stmt2= $conn->prepare($sql2);
+                    $stmt2->bindValue(':email', $email);
+                    $stmt2->bindValue(':passwords', $hash_password);
+                    if($stmt2->execute()){
+                        echo json_encode(array('status' => 'success', 'message'=> 'successfully changed password'));
+                    }
+                    else{
+                        echo json_encode(array('status' => 'error', 'message'=> 'failed to Change Password'));
+                    }
+                }
+                else{
+                    $response = array('status' => 'error', 'message' => 'User email not correct');
+                    echo json_encode($response);
+                }
+            }
+            else{
+                $response = array('status' => 'error', 'message' => 'Need params');
+                echo json_encode($response);
+            }
+        }
+        else{
+            $response = array('status' => 'error', 'message' => 'Wrong Request type');
+            echo json_encode($response);
+        }
+    }
+
     // this function login a new member into the system
     function login_member(): void{
         // Enable CORS for a specific origin
@@ -94,11 +140,11 @@
     
                 if($user && password_verify($password, $user['Passwords'])){
                     unset($user['Passwords']); // Remove password from returned data
-                    echo json_encode(array('status' => 'success', 'user' => $user));
+                    echo json_encode(array('status' => 'success', 'message'=>"Welcome back {$user['Firstname']} {$user['Lastname']}", 'user' => $user));
                 } 
                 elseif($user && $password === $user['Passwords']){
                     unset($user['Passwords']); // Remove password from returned data
-                    echo json_encode(array('status' => 'success', 'user' => $user));
+                    echo json_encode(array('status' => 'success','message'=>"Welcome back {$user['Firstname']} {$user['Lastname']}" ,'user' => $user));
                 }
                 else {
                    // http_response_code(401);
@@ -221,7 +267,88 @@
         }
     }
 
+    function hasRequested():void{
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+        if($_SERVER['REQUEST_METHOD']==="POST"){
+            if(isset($_POST["Member_id"])){
+                $member_id = $_POST["Member_id"];
+                $conn = connection_to_Maria_DB();
+                if(isMember($member_id, $conn)['status']){
+                    $sql = " SELECT COUNT(*) as member_count FROM organiser_list WHERE Member_id = :Member_id;";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':Member_id', $member_id);
+                    $stmt->execute();
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $member_count = $result['member_count'];
+                    $response = array("status" => "success", "member_count" => $member_count);
+                    echo json_encode($response);
+                }   
+                else{
 
+                }
+            }
+            else{
+
+            }
+        }
+        else{
+
+        }
+
+    }
+    // this function makes a request to the admin in order for 
+    // a user to be upgraded from surface 3 to 2
+    function request_level_up():void{
+        header('Access-Control-Allow-Origin: http://localhost:8888');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        header('Content-Type: application/json');
+
+        
+        if($_SERVER['REQUEST_METHOD']==="POST"){
+            if(isset($_POST["Member_id"])){
+                // store variable
+                $member_id = $_POST["Member_id"];
+                $conn = connection_to_Maria_DB();
+                if(isMember($member_id, $conn)['status']){
+                    if(!isOrganizer($member_id)){
+                        $date = date('Y-m-d H:i:s');
+                        $sql = "INSERT INTO organiser_list( Member_id, created_date) VALUES (:member_id, :created_at);";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bindValue(":member_id", $member_id);
+                        $stmt->bindValue(":created_at", $date);
+                        if($stmt->execute()){
+                            echo json_encode(array("status"=> "success","message"=> "Request send awaiting approval"));
+                        }else{
+                            http_response_code(500);
+                            $response = array("status"=> "error", "message"=> "Something went wrong");
+                            echo json_encode($response);
+                        }
+                    }else{
+                        http_response_code(401);
+                        $response = array('status'=> 'error','message'=> 'You are already an Organizer');
+                    }
+                }
+                else{
+                    http_response_code(401);
+                    echo json_encode(array('status'=> 'error','message'=> 'Member does not exist'));
+                }
+            }
+            else{
+                http_response_code(500);
+                $response = array("status"=> "error","message"=> "Wrong request need id");
+                echo json_encode($response);
+            }
+        }
+        else{
+            http_response_code(500);
+            echo json_encode(array("status"=> "error","message"=> "Wrong request"));
+        }
+    }
+    // this function returns all the information of a user
     function getUser(): void {
         
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {

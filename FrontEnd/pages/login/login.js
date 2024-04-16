@@ -16,12 +16,14 @@ loginForm.addEventListener('submit', (event)=>{
     })
     .then(data => {
         if (data.status === 'success') { // Assuming the response contains a 'status' property
-            alert(data.status);
-            console.log(data.user);
+            
             window.localStorage.setItem("userInfo",JSON.stringify(data.user));
-            window.location.href = "/";
+            displayToast(data.message,data.status);
+            setTimeout(() => {window.location.href = "/"; }, 3000);
+            
+            
         } else {
-            alert(data.message);
+            displayToast(data.message,data.status);
         }
     })
     .catch(error => {

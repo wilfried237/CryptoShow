@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/style/contactUs">
 
 <body>
-    <div class="container">
+    <div class="containers">
         <div class="wrapper">
             <h2 style="color: green;">OUR TEAM</h2>
             <hr>
