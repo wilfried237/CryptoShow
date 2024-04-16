@@ -379,20 +379,26 @@
         //connect to database
         $conn = connection_to_Maria_DB();
         //delete from all_messages  and message with the selected member_id
-        $sql = 'DELETE FROM All_messages WHERE Member_id = :Member_id;';
-        $sql2 = 'DELETE FROM message WHERE Message_id = :Message_id;';
+        $sql = 'DELETE FROM All_messages WHERE Message_id = :Message_id;';
         //prepare sql statement
         $stmt = $conn->prepare($sql);
-        $stmt2 = $conn->prepare($sql2);
         //bind placeholder message_id to variable message
         $stmt->bindValue(':Message_id', $Message_id, PDO::PARAM_INT);
-        $stmt2->bindValue(':Message_id', $Message_id, PDO::PARAM_INT);
+        
         //execure sql statement
-        if($stmt->execute() && $stmt2->execute()){
-            echo json_encode(array("status"=> "success"));
+        if($stmt->execute()){
+            $sql2 = 'DELETE FROM message WHERE Message_id = :Message_id;';
+            $stmt2 = $conn->prepare($sql2);
+            $stmt2->bindValue(':Message_id', $Message_id, PDO::PARAM_INT);
+            if($stmt2->execute()){
+                echo json_encode(array("status"=>"Message deleted from message and all_messages successfully"));
+            }
+            else{
+                echo json_encode(array("status"=>"message deleted from all_messages but not from message"));
+            }
         }
         else{
-            echo json_encode(array("status"=> "unsuccessful"));
+            echo json_encode(array("status"=> "message not deleted from all_messages or message table"));
         }
 
     }
