@@ -10,6 +10,8 @@ switch ($uri) {
         require('./components/Footer/Footer.css');
     break;
 
+
+
     case '/style/register':
         require('./pages/registration/registration.css');
     break;
@@ -49,7 +51,23 @@ switch ($uri) {
     case '/style/admin':
         require('./pages/admin/admin.css');
     break;
+
+    case '/style/admin_member':
+        require('./pages/admin_member/member.css');
+        break;
+
+    case '/style/admin_event':
+        require('./pages/admin_event/event.css');
+        break;
+
+    case '/style/admin_devices':
+        require('./pages/admin_devices/devices.css');
+        break;
     
+    case '/style/admin_nav':
+        require('./components/Admin_Nav/adminNav.css');
+    break;
+
     default:
     break;
 }
