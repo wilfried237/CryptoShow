@@ -378,8 +378,9 @@
         $Message_id = intval($_POST['Message_id']);
         //connect to database
         $conn = connection_to_Maria_DB();
-        //delete from all_messages  and message with the selected member_id
-        $sql = 'DELETE FROM All_messages WHERE Message_id = :Message_id;';
+        //delete from all_messages and message with the selected member_id
+        $sql = 'DELETE FROM All_messages WHERE Message_id = :Message_id;
+                DELETE FROM message WHERE Message_id = :Message_id;';
         //prepare sql statement
         $stmt = $conn->prepare($sql);
         //bind placeholder message_id to variable message
@@ -387,18 +388,10 @@
         
         //execure sql statement
         if($stmt->execute()){
-            $sql2 = 'DELETE FROM message WHERE Message_id = :Message_id;';
-            $stmt2 = $conn->prepare($sql2);
-            $stmt2->bindValue(':Message_id', $Message_id, PDO::PARAM_INT);
-            if($stmt2->execute()){
-                echo json_encode(array("status"=>"Message deleted from message and all_messages successfully"));
-            }
-            else{
-                echo json_encode(array("status"=>"message deleted from all_messages but not from message"));
-            }
+            echo json_encode(array("status"=>"Message deleted from message and all_messages successfully"));
         }
         else{
-            echo json_encode(array("status"=> "message not deleted from all_messages or message table"));
+            echo json_encode(array("status"=> "Unsuccesful"));
         }
 
     }
@@ -479,6 +472,10 @@ function show_thread_devices(){
         array_push($device_hash_map, $row);
     }
     echo json_encode(array("status"=> "success","users"=> $device_hash_map));
+}
+
+function delete_device(){
+    delete_device();
 }
 
 ?>

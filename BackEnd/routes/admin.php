@@ -40,6 +40,9 @@
         case '/admin/show_thread_devices':
             show_thread_devices();
         break;
+        case '/admin/delete_device':
+            delete_device();
+        break;
         case '/admin/show_messages':
             show_all_messages();
         break;
