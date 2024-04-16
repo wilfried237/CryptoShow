@@ -40,72 +40,6 @@ function calculatePublicationDuration(publicationDate) {
     return { seconds, days, minutes, years };
 }
 
-async function setthreadOnPage() {
-    getAllThreads();
-
-    const threadSection = document.getElementById("threads-section");
-    const thread = JSON.parse(localStorage.getItem("thread"));
-    const monthAcronyms = {
-        1: 'Jan',
-        2: 'Feb',
-        3: 'Mar',
-        4: 'Apr',
-        5: 'May',
-        6: 'Jun',
-        7: 'Jul',
-        8: 'Aug',
-        9: 'Sep',
-        10: 'Oct',
-        11: 'Nov',
-        12: 'Dec'
-    };
-    if (thread) {
-        let articles = "";
-
-        Object.values(thread).forEach(async (element, index) => {
-            const threadProfileID = element.Member_id;
-            try {
-                let memberData = await getMember(threadProfileID);
-                const dateArray = element.Thread_date.split("-");
-                const img = await getRandomImage();
-                const publicationDate = element.Created_at;
-                const { seconds, days, minutes, years } = calculatePublicationDuration(publicationDate);
-                articles += `
-                    <article class="threads-article">
-                        ${element.Thread_image == null ? `<img src="${img}" class="thread-image">` : `<img src="${element.Thread_image}" class="thread-image">`}
-                        <!-- <p class="threads-places">3 places</p> -->
-                        <div class="threads-info">
-                            <div class="threads-date-location">
-                                <div class="thread-date">
-                                    <p class="date">${dateArray[2]}</p>
-                                    <p class="month">${monthAcronyms[dateArray[1]]}</p>
-                                </div>
-                                <div class="thread-location">
-                                    <p class="title">${element.Thread_name}</p>
-                                    <p class="location">${element.Venue}</p>
-                                </div>
-                            </div>
-                            <div class="thread-book">
-                                <div class="thread-profile-username">
-                                    <a style="background-color:${memberData.Colour};" class="threads-userProfile">${memberData.Firstname[0].toUpperCase() + memberData.Lastname[0].toUpperCase()}</a>
-                                    <p class="thread-username">${memberData.Lastname + " " + memberData.Firstname}</p>
-                                </div>
-                                <button onclick="moveToPage(${element.Thread_id})" >See more</button>
-                            </div>
-                            <p class="thread-created-date">${years > 0 ? years + " year" : days > 0 ? days + " day" : minutes > 60 ? Math.floor(minutes / 60) + " Hour" : seconds > 60 ? seconds + " Seconds" : minutes + " Minute"} </p>
-                        </div>
-                    </article>
-                `;
-            } catch (error) {
-                console.error('Error fetching member data:', error);
-            }
-        });
-        
-
-        threadSection.innerHTML = articles; // Display all articles at once
-    }
-}
-
 async function getMember(id) {
     const data = new URLSearchParams();
     data.append('Member_id', id);
@@ -143,19 +77,20 @@ async function setthreadOnPage() {
     const threadSection = document.getElementById("threads-section");
     const thread = JSON.parse(localStorage.getItem("thread"));
     const monthAcronyms = {
-        1: 'Jan',
-        2: 'Feb',
-        3: 'Mar',
-        4: 'Apr',
-        5: 'May',
-        6: 'Jun',
-        7: 'Jul',
-        8: 'Aug',
-        9: 'Sep',
-        10: 'Oct',
-        11: 'Nov',
-        12: 'Dec'
+        '01': 'Jan',
+        '02': 'Feb',
+        '03': 'Mar',
+        '04': 'Apr',
+        '05': 'May',
+        '06': 'Jun',
+        '07': 'Jul',
+        '08': 'Aug',
+        '09': 'Sep',
+        '10': 'Oct',
+        '11': 'Nov',
+        '12': 'Dec'
     };
+    
 
     if (thread) {
         let articles = await Promise.all(Object.values(thread).map(async (element, index) => {
@@ -185,11 +120,11 @@ async function setthreadOnPage() {
                             <div class="thread-book">
                                 <div class="thread-profile-username">
                                     <a style="background-color:${memberData.Colour};" class="threads-userProfile">${memberData.Firstname[0].toUpperCase() + memberData.Lastname[0].toUpperCase()}</a>
-                                    <p class="thread-username">${memberData.Lastname + " " + memberData.Firstname}</p>
+                                    <p class="thread-username m-0">${memberData.Lastname + " " + memberData.Firstname}</p>
                                 </div>
-                                <button onclick="moveToPage(${index+1})" >See more</button>
+                                <button onclick="moveToPage(${element.Thread_id})" >See more</button>
                             </div>
-                            <p class="thread-created-date">${years > 0 ? years + " year" : days > 0 ? days + " day" : minutes > 60 ? Math.floor(minutes / 60) + " Hour" : seconds > 60 ? seconds + " Seconds" : minutes + " Minute"} </p>
+                            <p class="thread-created-date">${years > 0 ? years + " year" :  days > 0 ? days + " day" : minutes > 60 ? Math.floor(minutes / 60) + " Hour" : seconds > 60 ? seconds + " Seconds" : minutes + " Minute"} </p>
                         </div>
                     </article>
                 `;
@@ -224,13 +159,10 @@ function getRandomImage(){
 function moveToPage(id){
     const thread = JSON.parse(localStorage.getItem("thread"));
     const threadInfo = thread[id];
+    console.log(threadInfo)
     localStorage.setItem("threadInfo", JSON.stringify(threadInfo));
     window.location.href = "/threadInfo";
 }
-
-
-
-
 
 //-------------------------------------------
 

@@ -1,10 +1,9 @@
 <?php require("components/Navbar/Navbar.php") ?>
 <link rel="stylesheet" href="/style/home">
 
-<body>
-  <div class = "container">
+<div class = "containers">
     <div class="head">
-      <h1>Welcome to Crypto Show</h1>
+      <h1 class="mt-4">Welcome to Crypto Show</h1>
       <div class = "para">
       <p>This crypto show project that we've made it perfect for everyone! Make sure to sign up using the link above. You can view various events and make sure to attend!</p>
       </div>
@@ -20,5 +19,6 @@
     <img class ="img1" src="https://images.pexels.com/photos/20608917/pexels-photo-20608917/free-photo-of-a-motorcycle-parked-in-front-of-a-building-with-a-flower-garden.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
       </div>
     </div>
-  </div>
-</body>
+</div>
+
+<?php require("components/Footer/Footer.php") ?>

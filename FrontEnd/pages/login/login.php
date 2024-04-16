@@ -8,6 +8,7 @@
             <form method="POST" id="loginForm">
                 <input placeholder="Email" type="email" id="email" name="email" required>
                 <input placeholder="Password" type="password" id="password" name="password" required>
+                <a href="/forgetPassword">Forget Password ?</a>
                 <button type="submit">Login</button>
             </form>
     </div>

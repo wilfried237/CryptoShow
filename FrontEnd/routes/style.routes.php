@@ -6,6 +6,14 @@ switch ($uri) {
         require('./components/Navbar/Navbar.css');
     break;
 
+    case '/style/forgetPassword':
+        require('./pages/forgetPassword/forgetPassword.css');
+    break;
+    
+    case '/style/adminNav':
+        require('./components/AdminNav/adminNav.css');
+    break;
+
     case '/style/footer':
         require('./components/Footer/Footer.css');
     break;

@@ -26,11 +26,11 @@
                     $stmt->bindParam(':Member_id',$Member_id);
 
                     if($stmt->execute()){
-                        echo json_encode(array('Succesfully deleted member and all linked information'));
+                        echo json_encode(array('Successfully deleted member and all linked information'));
 
                     }
                     else{
-                        echo json_encode(array('status'=>'error','message'=>'Unsuccesful'));
+                        echo json_encode(array('status'=>'error','message'=>'Unsuccessful'));
                     }
                 }
                 else{
@@ -141,9 +141,7 @@
         header('Content-Type: application/json');
 
         if($_SERVER['REQUEST_METHOD']==='POST'){ 
-            echo json_encode(array('Hello 2'));
             if(isset($_POST['Thread_id']) && isset($_POST['Surface'])){
-                echo json_encode(array('Hello 3'));
                 $thread_id=$_POST['Thread_id'];
                 $Surface = $_POST['Surface'];
 

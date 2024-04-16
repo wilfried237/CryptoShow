@@ -14,6 +14,10 @@
             </div>
             <button id="logOutBtn">Logout</button>
         </div>
+        <div id="Organizer_Request_Div" class="d-flex justify-content-between align-items-center w-100 mt-4">
+            <p class="m-0 fs-5 fw-medium">Become an Organizer</p>
+            <button id="Organizer_Request_btn" class="btn btn-primary">Request</button>
+        </div>
         <Form method="post" id="personal-submit">  
             <input type="text" id="Firstname" name="Firstname">
             <input type="text" id="Lastname" name="Lastname">

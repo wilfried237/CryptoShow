@@ -5,6 +5,9 @@ switch ($uri) {
     case '/javascript/registration':
         require('./pages/registration/registration.js');
     break;
+    case '/javascript/forgetPassword':
+        require('./pages/forgetPassword/forgetPassword.js');
+    break;
     case '/javascript/login':
         require('./pages/login/login.js');
     break;
@@ -25,6 +28,9 @@ switch ($uri) {
     break;
     case '/javascript/allMembers':
         require('./pages/OrganiserThread/allMembers.js');
+    break;
+    case '/javascript/allDevice':
+        require('./pages/OrganiserThread/allDevices.js');
     break;
     default:
     break;
