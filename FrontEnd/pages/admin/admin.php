@@ -1,11 +1,5 @@
-<?php
-require("./BackEnd/function/authentication.php");
-if (!is_admin()) {
-  // Redirect to the homepage or display an error message
-  header("Location: ..Frontend/index.php");
-  exit();
-}
-?>
+<?php include("components/Admin_Nav/adminNav.php") ?>
+
 <head>
   
   <link rel="stylesheet" href='/style/admin'>
@@ -20,22 +14,6 @@ if (!is_admin()) {
 </head>
 
 <body>
-  <div class="containers">
-
-      <nav id="menu">
-        <div class="logo">
-          <h2>CryptoShow</h2>
-        </div>
-
-        <div class="items">
-          <li><i class="fa-solid fa-table-columns"></i><a href="#">Dashboard</a></li>
-          <li><i class="fa-solid fa-gear"></i><a href="#">Settings</a></li>
-          <li><i class="fa-solid fa-laptop"></i><a href="#">Device</a></li>
-          <li><i class="fa-regular fa-user"></i><a href="#">Member</a></li>
-        </div>
-      </nav>
-   
-
     <section id="interface">
       <div class="navigation">
         <h3>Dashboard</h3>

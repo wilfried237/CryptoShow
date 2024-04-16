@@ -29,4 +29,18 @@
         }
     }
 
+    //    This is the fxn to make basic(thread)searches in an array
+    function searchInArray($array, $needle) {
+        return in_array($needle, $array);
+    }
+
+    // Example usage:
+    $array = array("get_thread_names");
+    $needle = "orange";
+    if (searchInArray($array, $needle)) {
+        echo "Found!";
+    } else {
+        echo "Not Found!";
+    }
+
 ?>
