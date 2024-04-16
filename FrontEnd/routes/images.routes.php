@@ -1,17 +1,22 @@
 <?php
-$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
+$uri = $_SERVER['REQUEST_URI'];
 
 switch ($uri) {
     case '/images/logo':
-        require('./images/logo.png');
+        $imagePath = './images/logo.png';
         break;
 
     case '/about-us/image1':
-        require './images/team1.jpg';
+        $imagePath = './images/team1.jpg';
         break;
 
     case '/about-us/image2':
-        require './images/top-image2.jpeg';
+        $imagePath = './images/top-image2.jpeg';
+        break;
+
+    default:
+        // Handle 404 or default image
+        $imagePath = './images/default.jpg';
         break;
 }
 ?>

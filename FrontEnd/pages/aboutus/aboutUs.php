@@ -1,8 +1,8 @@
 <?php require("components/Navbar/Navbar.php") ?>
 <link rel="stylesheet" href='/style/aboutUs'>
 <body>
-<div class="row">
-    <div class="column">
+<div class="rows">
+    <div class="columns">
         <img id="one" src="https://images.pexels.com/photos/1690351/pexels-photo-1690351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Snow" >
   </div>
   <div class= "hero">
