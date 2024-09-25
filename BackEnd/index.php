@@ -10,7 +10,10 @@ $routes = [
     '/threads'=> './routes/threads.php',
     '/user'=> './routes/user.php',
     '/device'=>'./routes/device.php',
+    '/messages'=>'./routes/messages.php',
+    '/search'=>'./routes/search.php'
 ];
+
 
 routes_to_Controller($uri,$routes);
 

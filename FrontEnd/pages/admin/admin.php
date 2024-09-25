@@ -1,3 +1,4 @@
+<?php include("components/Admin_Nav/adminNav.php") ?>
 
 <head>
   
@@ -6,8 +7,6 @@
 </head>
 
 <body>
-  <div class="containers">
-    <?php require('components/AdminNav/adminNav.php') ?>
     <section id="interface">
       <div class="navigation">
         <h3>Dashboard</h3>

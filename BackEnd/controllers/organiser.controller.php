@@ -26,17 +26,17 @@
                 
                 if (isOrganizer($Member_id)) {
                     
-                    $sql_threads = "INSERT INTO Thread(Thread_name, Thread_date, Venue, `Limit`, Member_id,Thread_image,Thread_description) VALUES (:name, :date, :location, :limit, :member_id,:image,:description);";
+                    $sql_threads = "INSERT INTO Thread(Thread_name, Thread_date, Venue, Thread_Limit, Member_id,Thread_image,Thread_description) VALUES (:thread_name, :thread_date, :thread_location, :thread_limit, :member_id,:thread_image,:thread_description);";
 
                     $stmt_threads = $conn->prepare($sql_threads);
                     
                     $stmt_threads->bindValue(":member_id", $Member_id);
-                    $stmt_threads->bindValue(":location", $location);
-                    $stmt_threads->bindValue(":name", $name);
-                    $stmt_threads->bindValue(":limit", $limit);
-                    $stmt_threads->bindValue(":date", $date);
-                    $stmt_threads->bindValue(":image",$image);
-                    $stmt_threads->bindValue(":description",$description);
+                    $stmt_threads->bindValue(":thread_location", $location);
+                    $stmt_threads->bindValue(":thread_name", $name);
+                    $stmt_threads->bindValue(":thread_limit", $limit);
+                    $stmt_threads->bindValue(":thread_date", $date);
+                    $stmt_threads->bindValue(":thread_image",$image);
+                    $stmt_threads->bindValue(":thread_description",$description);
                     
                     
                     if ($stmt_threads->execute()) {
@@ -68,42 +68,46 @@
         header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type');
         header('Content-Type: application/json');
-    
-        if($_SERVER['REQUEST_METHOD'] === "POST"){
-            if(isset($_POST["Member_id"]) && isset($_POST["Organizer_id"]) && isset($_POST["thread_id"])){
-                $organizer_id = $_POST["Organizer_id"];
-                $member_id = $_POST["Member_id"];
-                $thread_id = $_POST["thread_id"];
+
+        
+        if($_SERVER['REQUEST_METHOD']==="POST"){
+            if(isset($_POST["Member_id"])){
+                // store variable
+                $member_id = intval($_POST["Member_id"]);
                 $conn = connection_to_Maria_DB();
-    
-                if(isThreadCreator($organizer_id, $thread_id, $conn)['status']){
-                    if(isMember($member_id, $conn)['status']){
-                        $sql = 'SELECT COUNT(*) as device_count FROM device WHERE Member_id = :Member_id AND Thread_id = :thread_id';
+                if(isMember($member_id, $conn)['status']){
+                    if(isOrganizer($member_id)){
+                        $date = date("h:i:sa");
+                        $sql = "INSERT INTO Organiser_list VALUES (:member_id, :date);";
                         $stmt = $conn->prepare($sql);
-                        $stmt->bindParam(':Member_id', $member_id);
-                        $stmt->bindParam(':thread_id', $thread_id);
-                        $stmt->execute();
-                        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                        $device_count = $result['device_count'];
-    
-                        $response = array("status" => "success", "device_count" => $device_count);
-                        echo json_encode($response);
-                    } else {
-                        $response = array("status" => "error", "message" => "Not a valid Member");
-                        echo json_encode($response);
+                        $stmt->bindValue(":member_id", $member_id, PDO::PARAM_INT);
+                        $stmt->bindValue(":date", $date, PDO::PARAM_STR);
+                        if($stmt->execute()){
+                            echo json_encode(array("status"=> "success","message"=> "Request send awaiting approval"));
+                        }else{
+                            http_response_code(500);
+                            $response = array("status"=> "error", "message"=> "Something went wrong");
+                            echo json_encode($response);
+                        }
+                    }else{
+                        http_response_code(401);
+                        $response = array('status'=> 'error','message'=> 'You are already an Organizer');
                     }
-                } else {
-                    $response = array("status" => "error", "message" => "You are not a valid Organizer");
-                    echo json_encode($response);
                 }
-            } else {
-                http_response_code(400);
-                $response = array("status" => "error", "message" => "Wrong request, need Member_id, Organizer_id, and thread_id");
+                else{
+                    http_response_code(401);
+                    echo json_encode(array('status'=> 'error','message'=> 'Member does not exist'));
+                }
+            }
+            else{
+                http_response_code(500);
+                $response = array("status"=> "error","message"=> "Wrong request need id");
                 echo json_encode($response);
             }
-        } else {
-            http_response_code(400);
-            echo json_encode(array("status" => "error", "message" => "Wrong request method, only POST is allowed"));
+        }
+        else{
+            http_response_code(500);
+            echo json_encode(array("status"=> "error","message"=> "Wrong request"));
         }
     }
     
@@ -166,7 +170,7 @@
         $conn = connection_to_Maria_DB();
         $sql = 'SELECT * FROM Member WHERE Surface=:surface_id';
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':surface_id', $surface);
+        $stmt->bindParam(':surface_id', $surface, PDO::PARAM_INT);
         $stmt->execute();
         $organiser_hash_map = array();
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -183,9 +187,9 @@
         header('Access-Control-Allow-Headers: Content-Type');
         header('Content-Type: application/json');
         if($_SERVER['REQUEST_METHOD']==="POST"){
-            if(isset($_POST["thread_id"]) && isset($_POST["Member_id"])){
-                $thread_id = $_POST["thread_id"];
-                $member_id = $_POST["Member_id"];
+            if(isset($_POST["thread_id"])&& isset($_POST["member_id"])){
+                $thread_id = intval($_POST["thread_id"]);
+                $member_id = intval($_POST["member_id"]);
                 
                 $conn = connection_to_Maria_DB();
 
@@ -362,14 +366,14 @@
         if($_SERVER['REQUEST_METHOD']==="POST"){
             if(isset($_POST["Member_id"])){
                 // storing variable obtained from Post Request
-                $Member_id = $_POST["Member_id"];
+                $Member_id = intval($_POST["Member_id"]);
                 if(isOrganizer($Member_id)){
 
                     $conn = connection_to_Maria_DB();
 
                     $sql = "SELECT * FROM thread WHERE Member_id= :Member_id;";
                     $stmt = $conn->prepare($sql);
-                    $stmt->bindValue(":Member_id", $Member_id);
+                    $stmt->bindValue(":Member_id", $Member_id, PDO::PARAM_INT);
                     $stmt->execute();
                     $threads_hash_map = [];
                     while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -488,7 +492,7 @@
         $surface = 2;
         $organizer_sql = 'SELECT * FROM Member WHERE Member_id = :organizer_id AND Surface = :surface;';
         $organizer_stmt = $conn->prepare($organizer_sql);
-        $organizer_stmt->bindValue(':organizer_id', $organizer_id);
+        $organizer_stmt->bindValue(':organizer_id', $organizer_id, PDO::PARAM_INT);
         $organizer_stmt->bindValue(':surface', $surface, SQLITE3_INTEGER);
     
         $organizer_stmt->execute();

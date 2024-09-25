@@ -15,16 +15,15 @@
         '/threadInfo'=> './pages/threadInfo/threadInfo.php',
         '/CreateEvent'=> './pages/OrganiserThread/createEvent.php',
         '/allMembers' => './pages/OrganiserThread/allMembers.php',
-        '/allDevice' =>'./pages/OrganiserThread/allDevices.php',
-        '/adminDevices' =>'./pages/admin/Pages/devices.php',
-        '/adminMember'=>'./pages/admin/Pages/member.php',
-        '/adminOrganizer'=>'./pages/admin/Pages/organizer.php',
-        '/adminThread'=>'./pages/admin/Pages/threath.php',
-        '/adminOrganizerList'=>'./pages/admin/Pages/OrganizerList.php',
-        '/admin'=>'./pages/admin/admin.php',
+
         '/style'=>'./routes/style.routes.php',
         '/images'=> './routes/images.routes.php',
         '/javascript'=> './routes/javascript.routes.php',
+        '/admin' => './pages/admin/admin.php',
+        '/memberAdmin' => './pages/admin_member/member.php',
+        '/adminEvent' => './pages/admin_event/event.php',
+        '/adminDevices' => './pages/admin_devices/devices.php',
+        '/adminSetting' => './pages/admin_setting/setting.php',
     ];
 
     routes_to_Controller_front($uri,$routes);

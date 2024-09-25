@@ -12,7 +12,8 @@
                 <div class="team-mem">
                     <img src="https://i.imgur.com/DxDgTRe.jpeg" alt="Mr.Greenfield">
                     <h3>Mr.Greenfield</h3>
-                    <p>Back-End/Front-End</p>
+                    <p>Back/End
+                    </p>
                 </div>
                 <div class="team-mem">
                     <img src="https://i.imgur.com/zlq5965.jpeg" alt="Mr. Wilfred">
